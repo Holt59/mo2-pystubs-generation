@@ -1,0 +1,27 @@
+IInstallationManager
+====================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IInstallationManager
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IInstallationManager.createFile
+      ~IInstallationManager.extractFile
+      ~IInstallationManager.extractFiles
+      ~IInstallationManager.getSupportedExtensions
+      ~IInstallationManager.installArchive
+      ~IInstallationManager.setURL
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: createFile
+   .. automethod:: extractFile
+   .. automethod:: extractFiles
+   .. automethod:: getSupportedExtensions
+   .. automethod:: installArchive
+   .. automethod:: setURL

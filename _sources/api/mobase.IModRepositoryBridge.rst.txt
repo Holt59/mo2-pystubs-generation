@@ -1,0 +1,51 @@
+IModRepositoryBridge
+====================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IModRepositoryBridge
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~IModRepositoryBridge.descriptionAvailable
+      ~IModRepositoryBridge.downloadURLsAvailable
+      ~IModRepositoryBridge.endorsementToggled
+      ~IModRepositoryBridge.endorsementsAvailable
+      ~IModRepositoryBridge.fileInfoAvailable
+      ~IModRepositoryBridge.filesAvailable
+      ~IModRepositoryBridge.requestFailed
+      ~IModRepositoryBridge.trackedModsAvailable
+      ~IModRepositoryBridge.trackingToggled
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IModRepositoryBridge.requestDescription
+      ~IModRepositoryBridge.requestDownloadURL
+      ~IModRepositoryBridge.requestFileInfo
+      ~IModRepositoryBridge.requestFiles
+      ~IModRepositoryBridge.requestToggleEndorsement
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: descriptionAvailable
+   .. autoattribute:: downloadURLsAvailable
+   .. autoattribute:: endorsementToggled
+   .. autoattribute:: endorsementsAvailable
+   .. autoattribute:: fileInfoAvailable
+   .. autoattribute:: filesAvailable
+   .. autoattribute:: requestFailed
+   .. autoattribute:: trackedModsAvailable
+   .. autoattribute:: trackingToggled
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: requestDescription
+   .. automethod:: requestDownloadURL
+   .. automethod:: requestFileInfo
+   .. automethod:: requestFiles
+   .. automethod:: requestToggleEndorsement

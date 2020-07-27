@@ -1,0 +1,1134 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IOrganizer &mdash; MO2 Python Plugin API 2.3rc1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IPlugin" href="mobase.IPlugin.html" />
+    <link rel="prev" title="IModRepositoryBridge" href="mobase.IModRepositoryBridge.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MO2 Python Plugin API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup-tools.html">Setting up the environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#required-tools">Required tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#preparation">Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#get-the-mobase-stubs">1. Get the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#configure-visual-studio-code-for-mobase">2. Configure Visual Studio Code for <code class="docutils literal notranslate"><span class="pre">mobase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#configure-mypy-to-find-the-mobase-stubs">3. Configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to find the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#testing-the-setup">Testing the setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugin-types.html">Type of Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#installers">Installers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#previewers">Previewers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#mod-page">Mod Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#game">Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#tool">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#proxies">Proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#free-plugins"><em>Free Plugins</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#extension-interfaces">Extension Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugin-types.html#diagnose">Diagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugin-types.html#file-mappings">File Mappings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#why-is-mo2-throwing-an-exception-when-i-try-to-create-a-type-inheriting-one-of-mo2-class">1. Why is MO2 throwing an exception when I try to create a type inheriting one of MO2 class?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#how-can-i-be-sure-to-implement-all-the-required-methods-when-creating-a-plugin">2. How can I be sure to implement all the required methods when creating a plugin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#why-are-my-isinstance-x-qobject-and-isinstance-y-qwidget-not-working">3. Why are my <code class="docutils literal notranslate"><span class="pre">isinstance(x,</span> <span class="pre">QObject)</span></code> and <code class="docutils literal notranslate"><span class="pre">isinstance(y,</span> <span class="pre">QWidget)</span></code> not working?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mobase.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getFileVersion.html">getFileVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getIconForExecutable.html">getIconForExecutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getProductVersion.html">getProductVersion</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../mobase.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mobase.BSAInvalidation.html">BSAInvalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.DataArchives.html">DataArchives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ExecutableForcedLoadSetting.html">ExecutableForcedLoadSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ExecutableInfo.html">ExecutableInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.FileInfo.html">FileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.FileTreeEntry.html">FileTreeEntry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GamePlugins.html">GamePlugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GuessQuality.html">GuessQuality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GuessedString.html">GuessedString</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IDownloadManager.html">IDownloadManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IFileTree.html">IFileTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IInstallationManager.html">IInstallationManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModInterface.html">IModInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModList.html">IModList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModRepositoryBridge.html">IModRepositoryBridge</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IOrganizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPlugin.html">IPlugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginDiagnose.html">IPluginDiagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginFileMapper.html">IPluginFileMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginGame.html">IPluginGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstaller.html">IPluginInstaller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstallerCustom.html">IPluginInstallerCustom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstallerSimple.html">IPluginInstallerSimple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginList.html">IPluginList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginModPage.html">IPluginModPage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginPreview.html">IPluginPreview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginTool.html">IPluginTool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IProfile.html">IProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ISaveGame.html">ISaveGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ISaveGameInfoWidget.html">ISaveGameInfoWidget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.InstallResult.html">InstallResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.InterfaceNotImplemented.html">InterfaceNotImplemented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.LoadOrderMechanism.html">LoadOrderMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.LocalSavegames.html">LocalSavegames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.Mapping.html">Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModDataChecker.html">ModDataChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModDataContent.html">ModDataContent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModRepositoryFileInfo.html">ModRepositoryFileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModState.html">ModState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.PluginSetting.html">PluginSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.PluginState.html">PluginState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ProfileSetting.html">ProfileSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ReleaseType.html">ReleaseType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.SaveGameInfo.html">SaveGameInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ScriptExtender.html">ScriptExtender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.SortMechanism.html">SortMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.UnmanagedMods.html">UnmanagedMods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.VersionInfo.html">VersionInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.VersionScheme.html">VersionScheme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MO2 Python Plugin API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a> &raquo;</li>
+        
+      <li>IOrganizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/mobase.IOrganizer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="iorganizer">
+<h1>IOrganizer<a class="headerlink" href="#iorganizer" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mobase.IOrganizer">
+<em class="property">class </em><code class="sig-prename descclassname">mobase.</code><code class="sig-name descname">IOrganizer</code><a class="headerlink" href="#mobase.IOrganizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface to class that provides information about the running session
+of Mod Organizer to be used by plugins.</p>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.appVersion" title="mobase.IOrganizer.appVersion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">appVersion</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The running version of Mod Organizer.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.basePath" title="mobase.IOrganizer.basePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basePath</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The absolute path to the base directory of Mod Organizer.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.createMod" title="mobase.IOrganizer.createMod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createMod</span></code></a>(name)</p></td>
+<td><p>Create a new mod with the specified name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.createNexusBridge" title="mobase.IOrganizer.createNexusBridge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createNexusBridge</span></code></a>()</p></td>
+<td><p>Create a new Nexus interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.downloadManager" title="mobase.IOrganizer.downloadManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">downloadManager</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The interface to the download manager.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.downloadsPath" title="mobase.IOrganizer.downloadsPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">downloadsPath</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The absolute path to the download directory.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.findFileInfos" title="mobase.IOrganizer.findFileInfos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findFileInfos</span></code></a>(path, filter)</p></td>
+<td><p>Find files in the virtual directory matching the specified filter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.findFiles" title="mobase.IOrganizer.findFiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findFiles</span></code></a>(**kwds)</p></td>
+<td><p>Helper for &#64;overload to raise when called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.getFileOrigins" title="mobase.IOrganizer.getFileOrigins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getFileOrigins</span></code></a>(filename)</p></td>
+<td><p>Retrieve the file origins for the speicified file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.getGame" title="mobase.IOrganizer.getGame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getGame</span></code></a>(name)</p></td>
+<td><p>Retrieve the game plugin matching the given name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.getMod" title="mobase.IOrganizer.getMod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getMod</span></code></a>(name)</p></td>
+<td><p>Retrieve an interface to a mod using its name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.installMod" title="mobase.IOrganizer.installMod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">installMod</span></code></a>(filename[, name_suggestion])</p></td>
+<td><p>Install a mod archive at the specified location.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.listDirectories" title="mobase.IOrganizer.listDirectories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listDirectories</span></code></a>(directory)</p></td>
+<td><p>Retrieve the list of (virtual) subdirectories in the given path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.managedGame" title="mobase.IOrganizer.managedGame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">managedGame</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The plugin corresponding to the current game.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.modDataChanged" title="mobase.IOrganizer.modDataChanged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modDataChanged</span></code></a>(mod)</p></td>
+<td><p>Notify the organizer that the given mod has changed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.modList" title="mobase.IOrganizer.modList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modList</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The interface to the mod list.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.modsPath" title="mobase.IOrganizer.modsPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modsPath</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The (absolute) path to the mods directory.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.modsSortedByProfilePriority" title="mobase.IOrganizer.modsSortedByProfilePriority"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modsSortedByProfilePriority</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The list of mod (names), sorted according to the current profile priorities.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.onAboutToRun" title="mobase.IOrganizer.onAboutToRun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onAboutToRun</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when an application is about to run.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.onFinishedRun" title="mobase.IOrganizer.onFinishedRun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onFinishedRun</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when an application has finished running.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.onModInstalled" title="mobase.IOrganizer.onModInstalled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onModInstalled</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when a new mod is installed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.onPluginSettingChanged" title="mobase.IOrganizer.onPluginSettingChanged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onPluginSettingChanged</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when a plugin setting is changed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.onProfileChanged" title="mobase.IOrganizer.onProfileChanged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onProfileChanged</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when the current profile is changed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.onUserInterfaceInitialized" title="mobase.IOrganizer.onUserInterfaceInitialized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onUserInterfaceInitialized</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when the UI has been fully initialized.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.overwritePath" title="mobase.IOrganizer.overwritePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">overwritePath</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The (absolute) path to the overwrite directory.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.persistent" title="mobase.IOrganizer.persistent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">persistent</span></code></a>(plugin_name, key[, default])</p></td>
+<td><p>Retrieve the specified persistent value for a plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.pluginDataPath" title="mobase.IOrganizer.pluginDataPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pluginDataPath</span></code></a>()</p></td>
+<td><p>Retrieve the path to a directory where plugin data should be stored.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.pluginList" title="mobase.IOrganizer.pluginList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pluginList</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The plugin list interface.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.pluginSetting" title="mobase.IOrganizer.pluginSetting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pluginSetting</span></code></a>(plugin_name, key)</p></td>
+<td><p>Retrieve settings of plugins.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.profile" title="mobase.IOrganizer.profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">profile</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The interface to the current profile.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.profileName" title="mobase.IOrganizer.profileName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">profileName</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The name of the current profile, or an empty string if no profile has been loaded (yet).</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.profilePath" title="mobase.IOrganizer.profilePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">profilePath</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The absolute path to the active profile or an empty string if no profile has been loaded (yet).</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.refreshModList" title="mobase.IOrganizer.refreshModList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refreshModList</span></code></a>([save_changes])</p></td>
+<td><p>Refresh the mod list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.removeMod" title="mobase.IOrganizer.removeMod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeMod</span></code></a>(mod)</p></td>
+<td><p>Remove a mod (from disc and from the UI).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.resolvePath" title="mobase.IOrganizer.resolvePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolvePath</span></code></a>(filename)</p></td>
+<td><p>Resolves a path relative to the virtual data directory to its absolute real path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.setPersistent" title="mobase.IOrganizer.setPersistent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setPersistent</span></code></a>(plugin_name, key, value[, sync])</p></td>
+<td><p>Set the specified persistent value for a plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.setPluginSetting" title="mobase.IOrganizer.setPluginSetting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setPluginSetting</span></code></a>(plugin_name, key, value)</p></td>
+<td><p>Set the specified setting for a plugin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IOrganizer.startApplication" title="mobase.IOrganizer.startApplication"><code class="xref py py-obj docutils literal notranslate"><span class="pre">startApplication</span></code></a>(executable[, args, cwd, …])</p></td>
+<td><p>Starts an application with virtual filesystem active.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IOrganizer.waitForApplication" title="mobase.IOrganizer.waitForApplication"><code class="xref py py-obj docutils literal notranslate"><span class="pre">waitForApplication</span></code></a>(handle)</p></td>
+<td><p>Wait for the application corresponding to the given handle to finish.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="mobase.IOrganizer.appVersion">
+<code class="sig-name descname">appVersion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.appVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The running version of Mod Organizer.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.VersionInfo.html#mobase.VersionInfo" title="mobase.VersionInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">VersionInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.basePath">
+<code class="sig-name descname">basePath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.basePath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The absolute path to the base directory of Mod Organizer.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.createMod">
+<code class="sig-name descname">createMod</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.createMod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new mod with the specified name.</p>
+<p>If a mod with the same name already exists, the user will be queried. If the user chooses
+to merge or replace, the call will succeed, otheriwse the call will fail.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the mod to create.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An interface to the newly created mod that can be used to modify it, or <cite>None</cite> if the mod</p>
+</dd>
+</dl>
+<p>could not be created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="mobase.IModInterface.html#mobase.IModInterface" title="mobase.IModInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">IModInterface</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.createNexusBridge">
+<code class="sig-name descname">createNexusBridge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.createNexusBridge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Nexus interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The newly created Nexus interface.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.IModRepositoryBridge.html#mobase.IModRepositoryBridge" title="mobase.IModRepositoryBridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">IModRepositoryBridge</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.downloadManager">
+<code class="sig-name descname">downloadManager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.downloadManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The interface to the download manager.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.IDownloadManager.html#mobase.IDownloadManager" title="mobase.IDownloadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">IDownloadManager</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.downloadsPath">
+<code class="sig-name descname">downloadsPath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.downloadsPath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The absolute path to the download directory.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.findFileInfos">
+<code class="sig-name descname">findFileInfos</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">filter</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.findFileInfos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find files in the virtual directory matching the specified filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – The path to search in (relative to the ‘data’ folder).</p></li>
+<li><p><strong>filter</strong> – The function to use to filter files. Should return True for the files to keep.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of <cite>QFileInfo</cite> corresponding to the matching files.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="mobase.FileInfo.html#mobase.FileInfo" title="mobase.FileInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInfo</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.findFiles">
+<code class="sig-name descname">findFiles</code><span class="sig-paren">(</span><em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.findFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for &#64;overload to raise when called.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.getFileOrigins">
+<code class="sig-name descname">getFileOrigins</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.getFileOrigins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the file origins for the speicified file.</p>
+<p>The origins are listed with their internal name. The internal name of a mod can differ
+from the display name for disambiguation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – Path to the file to retrieve origins for (relative to the ‘data’ folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of origins that contain the specified file, sorted by their priority.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.getGame">
+<code class="sig-name descname">getGame</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.getGame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the game plugin matching the given name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the game (short name).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The plugin for the given game, or <cite>None</cite> if none was found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="mobase.IPluginGame.html#mobase.IPluginGame" title="mobase.IPluginGame"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginGame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.getMod">
+<code class="sig-name descname">getMod</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.getMod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an interface to a mod using its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the mod to retrieve.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An interface to the given mod, or <cite>None</cite> if there is no mod with this name</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="mobase.IModInterface.html#mobase.IModInterface" title="mobase.IModInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">IModInterface</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.installMod">
+<code class="sig-name descname">installMod</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">name_suggestion=''</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.installMod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a mod archive at the specified location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – Absolute filepath to the archive to install.</p></li>
+<li><p><strong>name_suggestion</strong> – Suggested name for this mod. This can still be changed by the user.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An interface to the new installed mod, or <cite>None</cite> if no installation took place (canceled or failure).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="mobase.IModInterface.html#mobase.IModInterface" title="mobase.IModInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">IModInterface</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.listDirectories">
+<code class="sig-name descname">listDirectories</code><span class="sig-paren">(</span><em class="sig-param">directory</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.listDirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the list of (virtual) subdirectories in the given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> – Path to the directory to list (relative to the ‘data’ folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of directories in the given directory.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.managedGame">
+<code class="sig-name descname">managedGame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.managedGame" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The plugin corresponding to the current game.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.IPluginGame.html#mobase.IPluginGame" title="mobase.IPluginGame"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginGame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.modDataChanged">
+<code class="sig-name descname">modDataChanged</code><span class="sig-paren">(</span><em class="sig-param">mod</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.modDataChanged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify the organizer that the given mod has changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mod</strong> – The mod that has changed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.modList">
+<code class="sig-name descname">modList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.modList" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The interface to the mod list.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.IModList.html#mobase.IModList" title="mobase.IModList"><code class="xref py py-class docutils literal notranslate"><span class="pre">IModList</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.modsPath">
+<code class="sig-name descname">modsPath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.modsPath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The (absolute) path to the mods directory.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.modsSortedByProfilePriority">
+<code class="sig-name descname">modsSortedByProfilePriority</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.modsSortedByProfilePriority" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of mod (names), sorted according to the current profile priorities.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.onAboutToRun">
+<code class="sig-name descname">onAboutToRun</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.onAboutToRun" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when an application is about to run.</p>
+<p>Multiple handlers can be installed. If any of the handler returns <cite>False</cite>, the application will
+not run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when an application is about to run. The parameter is the absolute path        to the application to run. The function can return False to prevent the application from running.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.onFinishedRun">
+<code class="sig-name descname">onFinishedRun</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.onFinishedRun" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when an application has finished running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when an application has finished running. The first parameter is the absolute        path to the application, and the second parameter is the exit code of the application.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.onModInstalled">
+<code class="sig-name descname">onModInstalled</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.onModInstalled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when a new mod is installed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when a mod is installed. The parameter of the function is the name of the        installed mod.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.onPluginSettingChanged">
+<code class="sig-name descname">onPluginSettingChanged</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.onPluginSettingChanged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when a plugin setting is changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when a plugin setting is changed. The parameters are: The name of the plugin, the        name of the setting, the old value (or <cite>None</cite> if the setting did not exist before) and the new value
+of the setting (or <cite>None</cite> if the setting has been removed).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.onProfileChanged">
+<code class="sig-name descname">onProfileChanged</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.onProfileChanged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when the current profile is changed.</p>
+<p>The function is called when the profile is changed but some operations related to
+the profile might not be finished when this is called (e.g., the virtual file system
+might not be up-to-date).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when the current profile is changed. The first parameter is the old profile (can        be <cite>None</cite>, e.g. at startup), and the second parameter is the new profile (cannot be <cite>None</cite>).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.onUserInterfaceInitialized">
+<code class="sig-name descname">onUserInterfaceInitialized</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.onUserInterfaceInitialized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when the UI has been fully initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when the user-interface has been fully initialized. The parameter is the main        window of the application (<cite>QMainWindow</cite>).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.overwritePath">
+<code class="sig-name descname">overwritePath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.overwritePath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The (absolute) path to the overwrite directory.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.persistent">
+<code class="sig-name descname">persistent</code><span class="sig-paren">(</span><em class="sig-param">plugin_name</em>, <em class="sig-param">key</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.persistent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the specified persistent value for a plugin.</p>
+<p>A persistent is an arbitrary value that the plugin can set and retrieve that is persistently stored
+by the main application. There is no UI for the user to change this value but they can directly access
+the storage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plugin_name</strong> – Name of the plugin for which to retrieve the value. This should always be IPlugin::name() unless you have a        really good reason to access data of another mod AND if you can verify that plugin is actually installed.</p></li>
+<li><p><strong>key</strong> – Identifier of the setting.</p></li>
+<li><p><strong>default</strong> – Default value to return if the key is not set (yet).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value corresponding to the given persistent setting, or <cite>def</cite> is the key is not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.pluginDataPath">
+<code class="sig-name descname">pluginDataPath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.pluginDataPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the path to a directory where plugin data should be stored.</p>
+<p>For python plugins, it is recommended to use a dedicated folder (per plugin) if you need to
+store data (resources, or multiple python files).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path to a directory where plugin data should be stored.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.pluginList">
+<code class="sig-name descname">pluginList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.pluginList" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The plugin list interface.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.IPluginList.html#mobase.IPluginList" title="mobase.IPluginList"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginList</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.pluginSetting">
+<code class="sig-name descname">pluginSetting</code><span class="sig-paren">(</span><em class="sig-param">plugin_name</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.pluginSetting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve settings of plugins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plugin_name</strong> – Name of the plugin to retrieve the setting for.</p></li>
+<li><p><strong>key</strong> – Name of the setting to retrieve the value for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the setting.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.profile">
+<code class="sig-name descname">profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.profile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The interface to the current profile.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.IProfile.html#mobase.IProfile" title="mobase.IProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">IProfile</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.profileName">
+<code class="sig-name descname">profileName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.profileName" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of the current profile, or an empty string if no profile has been loaded (yet).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.profilePath">
+<code class="sig-name descname">profilePath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.profilePath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The absolute path to the active profile or an empty string if no profile has been loaded (yet).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.refreshModList">
+<code class="sig-name descname">refreshModList</code><span class="sig-paren">(</span><em class="sig-param">save_changes=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.refreshModList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refresh the mod list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>save_changes</strong> – If True, the relevant profile information is saved first (enabled mods and order of mods).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.removeMod">
+<code class="sig-name descname">removeMod</code><span class="sig-paren">(</span><em class="sig-param">mod</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.removeMod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a mod (from disc and from the UI).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mod</strong> – The mod to remove.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the mod was removed, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.resolvePath">
+<code class="sig-name descname">resolvePath</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.resolvePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a path relative to the virtual data directory to its absolute real path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – Path to resolve.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The absolute real path, or an empty string if the path was not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.setPersistent">
+<code class="sig-name descname">setPersistent</code><span class="sig-paren">(</span><em class="sig-param">plugin_name</em>, <em class="sig-param">key</em>, <em class="sig-param">value</em>, <em class="sig-param">sync=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.setPersistent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the specified persistent value for a plugin.</p>
+<p>This does not update the in-memory value for this setting, see <cite>setPluginSetting()</cite> for this.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plugin_name</strong> – Name of the plugin for which to change a value. This should always be IPlugin::name() unless you have a        really good reason to access data of another mod AND if you can verify that plugin is actually installed.</p></li>
+<li><p><strong>key</strong> – Identifier of the setting.</p></li>
+<li><p><strong>value</strong> – New value for the setting.</p></li>
+<li><p><strong>sync</strong> – If True, the storage is immediately written to disc. This costs performance but is safer against data loss.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.setPluginSetting">
+<code class="sig-name descname">setPluginSetting</code><span class="sig-paren">(</span><em class="sig-param">plugin_name</em>, <em class="sig-param">key</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.setPluginSetting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the specified setting for a plugin.</p>
+<p>This automatically notify handlers register with <cite>onPluginSettingChanged</cite>, so you do not have to do it yourself.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plugin_name</strong> – Name of the plugin for which to change a value. This should always be IPlugin::name() unless you have a        really good reason to access data of another mod AND if you can verify that plugin is actually installed.</p></li>
+<li><p><strong>key</strong> – Identifier of the setting.</p></li>
+<li><p><strong>value</strong> – New value for the setting.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.startApplication">
+<code class="sig-name descname">startApplication</code><span class="sig-paren">(</span><em class="sig-param">executable</em>, <em class="sig-param">args=[]</em>, <em class="sig-param">cwd=''</em>, <em class="sig-param">profile=''</em>, <em class="sig-param">forcedCustomOverwrite=''</em>, <em class="sig-param">ignoreCustomOverwrite=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.startApplication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts an application with virtual filesystem active.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>executable</strong> – Name or path of the executable. If this is only a filename, it will only work if it has been configured        in MO as an executable. If it is a relative path it is expected to be relative to the game directory.</p></li>
+<li><p><strong>args</strong> – Arguments to pass to the executable. If the list is empty, and <cite>executable</cite> refers to a configured executable,        the configured arguments are used.</p></li>
+<li><p><strong>cwd</strong> – The working directory for the executable. If this is empty, the path to the executable is used unless <cite>executable</cite>        referred to a configured MO executable, in which case the configured cwd is used.</p></li>
+<li><p><strong>profile</strong> – Profile to use. If this is empty (the default) the current profile is used.</p></li>
+<li><p><strong>forcedCustomOverwrite</strong> – The mod to set as the custom overwrite, regardless of what the profile has configured.</p></li>
+<li><p><strong>ignoreCustomOverwrite</strong> – Set to true to ignore the profile’s configured custom overwrite.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The handle to the started application, or 0 if the application failed to start.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IOrganizer.waitForApplication">
+<code class="sig-name descname">waitForApplication</code><span class="sig-paren">(</span><em class="sig-param">handle</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IOrganizer.waitForApplication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for the application corresponding to the given handle to finish.</p>
+<p>This will always show the lock overlay, regardless of whether the
+user has disabled locking in the setting, so use this with care.
+Note that the lock overlay will always allow the user to unlock, in
+which case this will return False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>handle</strong> – Handle of the application to wait for (as returned by <cite>startApplication()</cite>).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple <cite>(result, exitcode)</cite>, where <cite>result</cite> is a boolean indicating if the application</p>
+</dd>
+</dl>
+<p>completed successfully, and <cite>exitcode</cite> is the exit code of the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mobase.IPlugin.html" class="btn btn-neutral float-right" title="IPlugin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mobase.IModRepositoryBridge.html" class="btn btn-neutral float-left" title="IModRepositoryBridge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Holt59
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

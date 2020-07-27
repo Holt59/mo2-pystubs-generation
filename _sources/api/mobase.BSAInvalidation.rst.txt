@@ -1,0 +1,21 @@
+BSAInvalidation
+===============
+
+.. currentmodule:: mobase
+
+.. autoclass:: BSAInvalidation
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~BSAInvalidation.activate
+      ~BSAInvalidation.deactivate
+      ~BSAInvalidation.isInvalidationBSA
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: activate
+   .. automethod:: deactivate
+   .. automethod:: isInvalidationBSA

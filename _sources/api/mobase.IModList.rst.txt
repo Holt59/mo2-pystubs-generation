@@ -1,0 +1,31 @@
+IModList
+========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IModList
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IModList.allMods
+      ~IModList.displayName
+      ~IModList.onModMoved
+      ~IModList.onModStateChanged
+      ~IModList.priority
+      ~IModList.setActive
+      ~IModList.setPriority
+      ~IModList.state
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: allMods
+   .. automethod:: displayName
+   .. automethod:: onModMoved
+   .. automethod:: onModStateChanged
+   .. automethod:: priority
+   .. automethod:: setActive
+   .. automethod:: setPriority
+   .. automethod:: state

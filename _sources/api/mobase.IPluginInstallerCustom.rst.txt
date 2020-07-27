@@ -1,0 +1,21 @@
+IPluginInstallerCustom
+======================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginInstallerCustom
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginInstallerCustom.install
+      ~IPluginInstallerCustom.isArchiveSupported
+      ~IPluginInstallerCustom.supportedExtensions
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: install
+   .. automethod:: isArchiveSupported
+   .. automethod:: supportedExtensions

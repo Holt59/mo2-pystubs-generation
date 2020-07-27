@@ -1,0 +1,17 @@
+IPluginFileMapper
+=================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginFileMapper
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginFileMapper.mappings
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: mappings

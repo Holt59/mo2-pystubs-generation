@@ -1,0 +1,23 @@
+UnmanagedMods
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: UnmanagedMods
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~UnmanagedMods.displayName
+      ~UnmanagedMods.mods
+      ~UnmanagedMods.referenceFile
+      ~UnmanagedMods.secondaryFiles
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: displayName
+   .. automethod:: mods
+   .. automethod:: referenceFile
+   .. automethod:: secondaryFiles

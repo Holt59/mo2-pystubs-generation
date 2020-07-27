@@ -1,0 +1,37 @@
+IPluginList
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginList
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginList.isMaster
+      ~IPluginList.loadOrder
+      ~IPluginList.masters
+      ~IPluginList.onPluginMoved
+      ~IPluginList.onRefreshed
+      ~IPluginList.origin
+      ~IPluginList.pluginNames
+      ~IPluginList.priority
+      ~IPluginList.setLoadOrder
+      ~IPluginList.setState
+      ~IPluginList.state
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: isMaster
+   .. automethod:: loadOrder
+   .. automethod:: masters
+   .. automethod:: onPluginMoved
+   .. automethod:: onRefreshed
+   .. automethod:: origin
+   .. automethod:: pluginNames
+   .. automethod:: priority
+   .. automethod:: setLoadOrder
+   .. automethod:: setState
+   .. automethod:: state

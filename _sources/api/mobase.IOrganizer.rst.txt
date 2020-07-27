@@ -1,0 +1,93 @@
+IOrganizer
+==========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IOrganizer
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IOrganizer.appVersion
+      ~IOrganizer.basePath
+      ~IOrganizer.createMod
+      ~IOrganizer.createNexusBridge
+      ~IOrganizer.downloadManager
+      ~IOrganizer.downloadsPath
+      ~IOrganizer.findFileInfos
+      ~IOrganizer.findFiles
+      ~IOrganizer.getFileOrigins
+      ~IOrganizer.getGame
+      ~IOrganizer.getMod
+      ~IOrganizer.installMod
+      ~IOrganizer.listDirectories
+      ~IOrganizer.managedGame
+      ~IOrganizer.modDataChanged
+      ~IOrganizer.modList
+      ~IOrganizer.modsPath
+      ~IOrganizer.modsSortedByProfilePriority
+      ~IOrganizer.onAboutToRun
+      ~IOrganizer.onFinishedRun
+      ~IOrganizer.onModInstalled
+      ~IOrganizer.onPluginSettingChanged
+      ~IOrganizer.onProfileChanged
+      ~IOrganizer.onUserInterfaceInitialized
+      ~IOrganizer.overwritePath
+      ~IOrganizer.persistent
+      ~IOrganizer.pluginDataPath
+      ~IOrganizer.pluginList
+      ~IOrganizer.pluginSetting
+      ~IOrganizer.profile
+      ~IOrganizer.profileName
+      ~IOrganizer.profilePath
+      ~IOrganizer.refreshModList
+      ~IOrganizer.removeMod
+      ~IOrganizer.resolvePath
+      ~IOrganizer.setPersistent
+      ~IOrganizer.setPluginSetting
+      ~IOrganizer.startApplication
+      ~IOrganizer.waitForApplication
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: appVersion
+   .. automethod:: basePath
+   .. automethod:: createMod
+   .. automethod:: createNexusBridge
+   .. automethod:: downloadManager
+   .. automethod:: downloadsPath
+   .. automethod:: findFileInfos
+   .. automethod:: findFiles
+   .. automethod:: getFileOrigins
+   .. automethod:: getGame
+   .. automethod:: getMod
+   .. automethod:: installMod
+   .. automethod:: listDirectories
+   .. automethod:: managedGame
+   .. automethod:: modDataChanged
+   .. automethod:: modList
+   .. automethod:: modsPath
+   .. automethod:: modsSortedByProfilePriority
+   .. automethod:: onAboutToRun
+   .. automethod:: onFinishedRun
+   .. automethod:: onModInstalled
+   .. automethod:: onPluginSettingChanged
+   .. automethod:: onProfileChanged
+   .. automethod:: onUserInterfaceInitialized
+   .. automethod:: overwritePath
+   .. automethod:: persistent
+   .. automethod:: pluginDataPath
+   .. automethod:: pluginList
+   .. automethod:: pluginSetting
+   .. automethod:: profile
+   .. automethod:: profileName
+   .. automethod:: profilePath
+   .. automethod:: refreshModList
+   .. automethod:: removeMod
+   .. automethod:: resolvePath
+   .. automethod:: setPersistent
+   .. automethod:: setPluginSetting
+   .. automethod:: startApplication
+   .. automethod:: waitForApplication

@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up the environment &mdash; MO2 Python Plugin API 2.3rc1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Type of Plugins" href="plugin-types.html" />
+    <link rel="prev" title="Welcome to MO2 Python Plugin API’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> MO2 Python Plugin API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up the environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#required-tools">Required tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preparation">Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-mobase-stubs">1. Get the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-visual-studio-code-for-mobase">2. Configure Visual Studio Code for <code class="docutils literal notranslate"><span class="pre">mobase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-mypy-to-find-the-mobase-stubs">3. Configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to find the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-setup">Testing the setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugin-types.html">Type of Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#installers">Installers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#previewers">Previewers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#mod-page">Mod Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#game">Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#tool">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#proxies">Proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#free-plugins"><em>Free Plugins</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-types.html#extension-interfaces">Extension Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plugin-types.html#diagnose">Diagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-types.html#file-mappings">File Mappings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-is-mo2-throwing-an-exception-when-i-try-to-create-a-type-inheriting-one-of-mo2-class">1. Why is MO2 throwing an exception when I try to create a type inheriting one of MO2 class?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-can-i-be-sure-to-implement-all-the-required-methods-when-creating-a-plugin">2. How can I be sure to implement all the required methods when creating a plugin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-are-my-isinstance-x-qobject-and-isinstance-y-qwidget-not-working">3. Why are my <code class="docutils literal notranslate"><span class="pre">isinstance(x,</span> <span class="pre">QObject)</span></code> and <code class="docutils literal notranslate"><span class="pre">isinstance(y,</span> <span class="pre">QWidget)</span></code> not working?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mobase.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.getFileVersion.html">getFileVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.getIconForExecutable.html">getIconForExecutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.getProductVersion.html">getProductVersion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mobase.html#classes">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.BSAInvalidation.html">BSAInvalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.DataArchives.html">DataArchives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ExecutableForcedLoadSetting.html">ExecutableForcedLoadSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ExecutableInfo.html">ExecutableInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.FileInfo.html">FileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.FileTreeEntry.html">FileTreeEntry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.GamePlugins.html">GamePlugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.GuessQuality.html">GuessQuality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.GuessedString.html">GuessedString</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IDownloadManager.html">IDownloadManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IFileTree.html">IFileTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IInstallationManager.html">IInstallationManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IModInterface.html">IModInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IModList.html">IModList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IModRepositoryBridge.html">IModRepositoryBridge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IOrganizer.html">IOrganizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPlugin.html">IPlugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginDiagnose.html">IPluginDiagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginFileMapper.html">IPluginFileMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginGame.html">IPluginGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginInstaller.html">IPluginInstaller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginInstallerCustom.html">IPluginInstallerCustom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginInstallerSimple.html">IPluginInstallerSimple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginList.html">IPluginList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginModPage.html">IPluginModPage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginPreview.html">IPluginPreview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginTool.html">IPluginTool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IProfile.html">IProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ISaveGame.html">ISaveGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ISaveGameInfoWidget.html">ISaveGameInfoWidget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.InstallResult.html">InstallResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.InterfaceNotImplemented.html">InterfaceNotImplemented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.LoadOrderMechanism.html">LoadOrderMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.LocalSavegames.html">LocalSavegames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.Mapping.html">Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModDataChecker.html">ModDataChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModDataContent.html">ModDataContent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModRepositoryFileInfo.html">ModRepositoryFileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModState.html">ModState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.PluginSetting.html">PluginSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.PluginState.html">PluginState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ProfileSetting.html">ProfileSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ReleaseType.html">ReleaseType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.SaveGameInfo.html">SaveGameInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ScriptExtender.html">ScriptExtender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.SortMechanism.html">SortMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.UnmanagedMods.html">UnmanagedMods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.VersionInfo.html">VersionInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.VersionScheme.html">VersionScheme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MO2 Python Plugin API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Setting up the environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setup-tools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-the-environment">
+<h1>Setting up the environment<a class="headerlink" href="#setting-up-the-environment" title="Permalink to this headline">¶</a></h1>
+<p>This page will get you started for creating a MO2 python plugin. If you have troubles getting
+everything setup, feel free to come by our discord server at <a class="reference external" href="https://discord.gg/cYwdcxj">https://discord.gg/cYwdcxj</a>.</p>
+<div class="section" id="required-tools">
+<h2>Required tools<a class="headerlink" href="#required-tools" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to write a MO2 python plugin using any text editor, but this guide will focus on
+<a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a>.
+This guide assumes that:</p>
+<ul class="simple">
+<li><p>You have <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> installed with the
+<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</a>.</p></li>
+<li><p>You have Python installed: <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>.</p>
+<ul>
+<li><p>It is recommended but not mandatory to use the Python version that is used by MO2.
+You can check the <code class="docutils literal notranslate"><span class="pre">pythonXX.dll</span></code> in the MO2 installation folder to find the Python version used by MO2 (<code class="docutils literal notranslate"><span class="pre">python38.dll</span></code> means Python 3.8).</p></li>
+</ul>
+</li>
+<li><p>You obviously need a valid MO2 installation: <a class="reference external" href="https://github.com/modorganizer2/modorganizer/releases">https://github.com/modorganizer2/modorganizer/releases</a></p>
+<ul>
+<li><p>This guide is written for MO2 ≥ 2.3.0.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Note:</strong> In the following, I will refer to the MO2 installation directory as <code class="docutils literal notranslate"><span class="pre">$MO2DIR</span></code>. So if you
+installed MO2 at <cite>C:MO2</cite> and you are asked to copy a file to <code class="docutils literal notranslate"><span class="pre">$MO2DIR/plugins</span></code>, it refers to <code class="docutils literal notranslate"><span class="pre">C:\MO2\plugins</span></code>.</p>
+</div>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note:</strong> This part is optional but highly recommended if you want a proper environment to work with.
+Everything here is written to be as simple as possible but you can of course adapt it to your preferences: use a python virtual
+environment, use workspace settings instead of global ones, etc.</p>
+<div class="section" id="get-the-mobase-stubs">
+<h3>1. Get the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs<a class="headerlink" href="#get-the-mobase-stubs" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">mobase</span></code> is the MO2 Python module. The module is written in C++ and thus cannot be read directly by tools such
+as <code class="docutils literal notranslate"><span class="pre">flake8</span></code> or <code class="docutils literal notranslate"><span class="pre">mypy</span></code>.
+Instead, we provide <a class="reference external" href="https://stackoverflow.com/questions/59051631/what-is-the-use-of-stub-files-pyi-in-python">stubs</a>
+which can be used for auto-completion or type-checking.</p>
+<p>The stubs for <code class="docutils literal notranslate"><span class="pre">mobase</span></code> are available at <a class="reference external" href="https://github.com/ModOrganizer2/pystubs-generation/tree/master/stubs">https://github.com/ModOrganizer2/pystubs-generation/tree/master/stubs</a>.
+You want to download the <code class="docutils literal notranslate"><span class="pre">mobase.pyi</span></code> file in the folder corresponding to your MO2 version and put it under <code class="docutils literal notranslate"><span class="pre">$MO2DIR/plugins/data</span></code>.</p>
+<p><strong>Note:</strong> It is possible to put the stubs in a different location, but we are going to use <code class="docutils literal notranslate"><span class="pre">$MO2DIR/plugins/data</span></code> for PyQt5,
+so we might as well use it for the stubs.</p>
+</div>
+<div class="section" id="configure-visual-studio-code-for-mobase">
+<h3>2. Configure Visual Studio Code for <code class="docutils literal notranslate"><span class="pre">mobase</span></code><a class="headerlink" href="#configure-visual-studio-code-for-mobase" title="Permalink to this headline">¶</a></h3>
+<p>We are going to configure Visual Studio Code to have auto-completion and linting (error and type checking)
+for the MO2 Python module.
+Open <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> (Ctrl+Shift+P, then “Open Settings (JSON)”), and add the following entries:</p>
+<div class="highlight-json-object notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;python.linting.enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nt">&quot;python.linting.mypyEnabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nt">&quot;python.linting.flake8Enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nt">&quot;python.autoComplete.extraPaths&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;$MO2DIR\\plugins\\data&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-mypy-to-find-the-mobase-stubs">
+<h3>3. Configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to find the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs<a class="headerlink" href="#configure-mypy-to-find-the-mobase-stubs" title="Permalink to this headline">¶</a></h3>
+<p>There are multiply way to configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code>:</p>
+<ol class="arabic simple">
+<li><p>You can create a <code class="docutils literal notranslate"><span class="pre">mypy.ini</span></code> file somewhere containing:</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mypy]</span>
+<span class="na">mypy_path</span> <span class="o">=</span> <span class="s">$MO2DIR\plugins\data</span>
+</pre></div>
+</div>
+<p>And then add the following to <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> (with the correct path):</p>
+<div class="highlight-json-object notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;python.linting.mypyArgs&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;--config-file=path-to-mypy.ini&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>2. You can set the <code class="docutils literal notranslate"><span class="pre">MYPYPATH</span></code> environment variable to <code class="docutils literal notranslate"><span class="pre">$MO2DIR\plugins\data</span></code> (this requires
+restarting VS code).</p>
+</div>
+</div>
+<div class="section" id="testing-the-setup">
+<h2>Testing the setup<a class="headerlink" href="#testing-the-setup" title="Permalink to this headline">¶</a></h2>
+<p>Create a new Python file in Visual Studio Code, and paste the following content (if you create
+the file in <code class="docutils literal notranslate"><span class="pre">$MO2DIR\plugins</span></code>, do not forget to delete it after since it is not a valid
+plugin):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mobase</span>
+
+
+<span class="k">class</span> <span class="nc">MyPlugin</span><span class="p">(</span><span class="n">mobase</span><span class="o">.</span><span class="n">IPluginTool</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">organizer</span><span class="p">:</span> <span class="n">mobase</span><span class="o">.</span><span class="n">IOrganizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">organizer</span><span class="o">.</span><span class="n">dow</span>  <span class="c1"># (1)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">def</span> <span class="nf">createPlugin</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">mobase</span><span class="o">.</span><span class="n">IPlugin</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">MyPlugin</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If your setup is valid, here is what you should have.</p>
+<ul class="simple">
+<li><p>You should see the following (with the errors underlined):</p></li>
+</ul>
+<img alt="_images/check-setup-1.png" src="_images/check-setup-1.png" />
+<ul class="simple">
+<li><p>If you press <code class="docutils literal notranslate"><span class="pre">Ctrl+Space</span></code> after <code class="docutils literal notranslate"><span class="pre">.down</span></code> (1), you should see the following
+meaning that auto-complete is working:</p></li>
+</ul>
+<img alt="_images/check-setup-2.png" src="_images/check-setup-2.png" />
+<ul class="simple">
+<li><p>In the error window (click <img alt="error-window" src="_images/error-window.png" /> on the status bar), you should see
+the 3 following errors:</p></li>
+</ul>
+<img alt="_images/check-setup-3.png" src="_images/check-setup-3.png" />
+<p>If everything is as above, you can delete the test file and move on to writting
+your own plugin!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plugin-types.html" class="btn btn-neutral float-right" title="Type of Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to MO2 Python Plugin API’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Holt59
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

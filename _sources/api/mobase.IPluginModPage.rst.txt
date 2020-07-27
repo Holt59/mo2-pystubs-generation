@@ -1,0 +1,27 @@
+IPluginModPage
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginModPage
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginModPage.displayName
+      ~IPluginModPage.handlesDownload
+      ~IPluginModPage.icon
+      ~IPluginModPage.pageURL
+      ~IPluginModPage.setParentWidget
+      ~IPluginModPage.useIntegratedBrowser
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: displayName
+   .. automethod:: handlesDownload
+   .. automethod:: icon
+   .. automethod:: pageURL
+   .. automethod:: setParentWidget
+   .. automethod:: useIntegratedBrowser

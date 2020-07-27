@@ -1,0 +1,23 @@
+SortMechanism
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: SortMechanism
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~SortMechanism.BOSS
+      ~SortMechanism.LOOT
+      ~SortMechanism.MLOX
+      ~SortMechanism.NONE
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: BOSS
+   .. autoattribute:: LOOT
+   .. autoattribute:: MLOX
+   .. autoattribute:: NONE

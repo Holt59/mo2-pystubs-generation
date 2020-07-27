@@ -1,0 +1,51 @@
+FileTreeEntry
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: FileTreeEntry
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~FileTreeEntry.DIRECTORY
+      ~FileTreeEntry.FILE
+      ~FileTreeEntry.FILE_OR_DIRECTORY
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~FileTreeEntry.detach
+      ~FileTreeEntry.fileType
+      ~FileTreeEntry.hasSuffix
+      ~FileTreeEntry.isDir
+      ~FileTreeEntry.isFile
+      ~FileTreeEntry.moveTo
+      ~FileTreeEntry.name
+      ~FileTreeEntry.parent
+      ~FileTreeEntry.path
+      ~FileTreeEntry.pathFrom
+      ~FileTreeEntry.suffix
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: DIRECTORY
+   .. autoattribute:: FILE
+   .. autoattribute:: FILE_OR_DIRECTORY
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: detach
+   .. automethod:: fileType
+   .. automethod:: hasSuffix
+   .. automethod:: isDir
+   .. automethod:: isFile
+   .. automethod:: moveTo
+   .. automethod:: name
+   .. automethod:: parent
+   .. automethod:: path
+   .. automethod:: pathFrom
+   .. automethod:: suffix

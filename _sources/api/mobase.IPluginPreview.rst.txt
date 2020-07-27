@@ -1,0 +1,19 @@
+IPluginPreview
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginPreview
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginPreview.genFilePreview
+      ~IPluginPreview.supportedExtensions
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: genFilePreview
+   .. automethod:: supportedExtensions

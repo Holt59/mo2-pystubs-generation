@@ -1,0 +1,83 @@
+IPluginGame
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginGame
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginGame.CCPlugins
+      ~IPluginGame.DLCPlugins
+      ~IPluginGame.binaryName
+      ~IPluginGame.dataDirectory
+      ~IPluginGame.documentsDirectory
+      ~IPluginGame.executableForcedLoads
+      ~IPluginGame.executables
+      ~IPluginGame.feature
+      ~IPluginGame.featureList
+      ~IPluginGame.gameDirectory
+      ~IPluginGame.gameIcon
+      ~IPluginGame.gameName
+      ~IPluginGame.gameNexusName
+      ~IPluginGame.gameShortName
+      ~IPluginGame.gameVariants
+      ~IPluginGame.gameVersion
+      ~IPluginGame.getLauncherName
+      ~IPluginGame.iniFiles
+      ~IPluginGame.initializeProfile
+      ~IPluginGame.isInstalled
+      ~IPluginGame.loadOrderMechanism
+      ~IPluginGame.looksValid
+      ~IPluginGame.nexusGameID
+      ~IPluginGame.nexusModOrganizerID
+      ~IPluginGame.primaryPlugins
+      ~IPluginGame.primarySources
+      ~IPluginGame.savegameExtension
+      ~IPluginGame.savegameSEExtension
+      ~IPluginGame.savesDirectory
+      ~IPluginGame.setGamePath
+      ~IPluginGame.setGameVariant
+      ~IPluginGame.sortMechanism
+      ~IPluginGame.steamAPPId
+      ~IPluginGame.validShortNames
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: CCPlugins
+   .. automethod:: DLCPlugins
+   .. automethod:: binaryName
+   .. automethod:: dataDirectory
+   .. automethod:: documentsDirectory
+   .. automethod:: executableForcedLoads
+   .. automethod:: executables
+   .. automethod:: feature
+   .. automethod:: featureList
+   .. automethod:: gameDirectory
+   .. automethod:: gameIcon
+   .. automethod:: gameName
+   .. automethod:: gameNexusName
+   .. automethod:: gameShortName
+   .. automethod:: gameVariants
+   .. automethod:: gameVersion
+   .. automethod:: getLauncherName
+   .. automethod:: iniFiles
+   .. automethod:: initializeProfile
+   .. automethod:: isInstalled
+   .. automethod:: loadOrderMechanism
+   .. automethod:: looksValid
+   .. automethod:: nexusGameID
+   .. automethod:: nexusModOrganizerID
+   .. automethod:: primaryPlugins
+   .. automethod:: primarySources
+   .. automethod:: savegameExtension
+   .. automethod:: savegameSEExtension
+   .. automethod:: savesDirectory
+   .. automethod:: setGamePath
+   .. automethod:: setGameVariant
+   .. automethod:: sortMechanism
+   .. automethod:: steamAPPId
+   .. automethod:: validShortNames

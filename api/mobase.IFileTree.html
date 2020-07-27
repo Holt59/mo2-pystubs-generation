@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IFileTree &mdash; MO2 Python Plugin API 2.3rc1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IInstallationManager" href="mobase.IInstallationManager.html" />
+    <link rel="prev" title="IDownloadManager" href="mobase.IDownloadManager.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MO2 Python Plugin API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup-tools.html">Setting up the environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#required-tools">Required tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#preparation">Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#get-the-mobase-stubs">1. Get the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#configure-visual-studio-code-for-mobase">2. Configure Visual Studio Code for <code class="docutils literal notranslate"><span class="pre">mobase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#configure-mypy-to-find-the-mobase-stubs">3. Configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to find the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#testing-the-setup">Testing the setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugin-types.html">Type of Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#installers">Installers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#previewers">Previewers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#mod-page">Mod Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#game">Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#tool">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#proxies">Proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#free-plugins"><em>Free Plugins</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#extension-interfaces">Extension Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugin-types.html#diagnose">Diagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugin-types.html#file-mappings">File Mappings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#why-is-mo2-throwing-an-exception-when-i-try-to-create-a-type-inheriting-one-of-mo2-class">1. Why is MO2 throwing an exception when I try to create a type inheriting one of MO2 class?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#how-can-i-be-sure-to-implement-all-the-required-methods-when-creating-a-plugin">2. How can I be sure to implement all the required methods when creating a plugin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#why-are-my-isinstance-x-qobject-and-isinstance-y-qwidget-not-working">3. Why are my <code class="docutils literal notranslate"><span class="pre">isinstance(x,</span> <span class="pre">QObject)</span></code> and <code class="docutils literal notranslate"><span class="pre">isinstance(y,</span> <span class="pre">QWidget)</span></code> not working?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mobase.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getFileVersion.html">getFileVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getIconForExecutable.html">getIconForExecutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getProductVersion.html">getProductVersion</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../mobase.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mobase.BSAInvalidation.html">BSAInvalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.DataArchives.html">DataArchives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ExecutableForcedLoadSetting.html">ExecutableForcedLoadSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ExecutableInfo.html">ExecutableInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.FileInfo.html">FileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.FileTreeEntry.html">FileTreeEntry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GamePlugins.html">GamePlugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GuessQuality.html">GuessQuality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GuessedString.html">GuessedString</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IDownloadManager.html">IDownloadManager</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IFileTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IInstallationManager.html">IInstallationManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModInterface.html">IModInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModList.html">IModList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModRepositoryBridge.html">IModRepositoryBridge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IOrganizer.html">IOrganizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPlugin.html">IPlugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginDiagnose.html">IPluginDiagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginFileMapper.html">IPluginFileMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginGame.html">IPluginGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstaller.html">IPluginInstaller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstallerCustom.html">IPluginInstallerCustom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstallerSimple.html">IPluginInstallerSimple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginList.html">IPluginList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginModPage.html">IPluginModPage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginPreview.html">IPluginPreview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginTool.html">IPluginTool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IProfile.html">IProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ISaveGame.html">ISaveGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ISaveGameInfoWidget.html">ISaveGameInfoWidget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.InstallResult.html">InstallResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.InterfaceNotImplemented.html">InterfaceNotImplemented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.LoadOrderMechanism.html">LoadOrderMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.LocalSavegames.html">LocalSavegames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.Mapping.html">Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModDataChecker.html">ModDataChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModDataContent.html">ModDataContent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModRepositoryFileInfo.html">ModRepositoryFileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModState.html">ModState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.PluginSetting.html">PluginSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.PluginState.html">PluginState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ProfileSetting.html">ProfileSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ReleaseType.html">ReleaseType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.SaveGameInfo.html">SaveGameInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ScriptExtender.html">ScriptExtender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.SortMechanism.html">SortMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.UnmanagedMods.html">UnmanagedMods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.VersionInfo.html">VersionInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.VersionScheme.html">VersionScheme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MO2 Python Plugin API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a> &raquo;</li>
+        
+      <li>IFileTree</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/mobase.IFileTree.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ifiletree">
+<h1>IFileTree<a class="headerlink" href="#ifiletree" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mobase.IFileTree">
+<em class="property">class </em><code class="sig-prename descclassname">mobase.</code><code class="sig-name descname">IFileTree</code><a class="headerlink" href="#mobase.IFileTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mobase.FileTreeEntry.html#mobase.FileTreeEntry" title="mobase.FileTreeEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">mobase.FileTreeEntry</span></code></a></p>
+<p>Interface to classes that provides way to visualize and alter file trees. The tree
+may not correspond to an actual file tree on the disk (e.g., inside an archive,
+from a QTree Widget, …).</p>
+<p>Read-only operations on the tree are thread-safe, even when the tree has not been populated
+yet.</p>
+<p>In order to prevent wrong usage of the tree, implementing classes may throw
+UnsupportedOperationException if an operation is not supported. By default, all operations
+are supported, but some may not make sense in many situations.</p>
+<p>The goal of this is not reflect the change made to a IFileTree to the disk, but child
+classes may override relevant methods to do so.</p>
+<p>The tree is built upon FileTreeEntry. A given tree holds shared pointers to its entries
+while each entry holds a weak pointer to its parent, this means that the descending link
+are strong (shared pointers) but the uplink are weaks.</p>
+<p>Accessing the parent is always done by locking the weak pointer so that returned pointer
+or either null or valid. This structure implies that as long as the initial root lives,
+entry should not be destroyed, unless the entry are detached from the root and no shared
+pointers are kept.</p>
+<p>However, it is not guarantee that one can go up the tree from a single node entry. If the
+root node is destroyed, it will not be possible to go up the tree, even if we still have
+a valid shared pointer.</p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.CONTINUE" title="mobase.IFileTree.CONTINUE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONTINUE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.FAIL_IF_EXISTS" title="mobase.IFileTree.FAIL_IF_EXISTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FAIL_IF_EXISTS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.MERGE" title="mobase.IFileTree.MERGE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MERGE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.REPLACE" title="mobase.IFileTree.REPLACE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">REPLACE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.SKIP" title="mobase.IFileTree.SKIP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SKIP</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.STOP" title="mobase.IFileTree.STOP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">STOP</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.addDirectory" title="mobase.IFileTree.addDirectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addDirectory</span></code></a>(path)</p></td>
+<td><p>Create a new directory tree under this tree.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.addFile" title="mobase.IFileTree.addFile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addFile</span></code></a>(path[, replace_if_exists])</p></td>
+<td><p>Create a new file directly under this tree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.clear" title="mobase.IFileTree.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</p></td>
+<td><p>Delete (detach) all the entries from this tree.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.copy" title="mobase.IFileTree.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>(entry[, path, policy])</p></td>
+<td><p>Move the given entry to the given path under this tree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.createOrphanTree" title="mobase.IFileTree.createOrphanTree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createOrphanTree</span></code></a>([name])</p></td>
+<td><p>Create a new orphan empty tree.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.exists" title="mobase.IFileTree.exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exists</span></code></a>(path[, type])</p></td>
+<td><p>Check if the given entry exists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.find" title="mobase.IFileTree.find"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find</span></code></a>(path[, type])</p></td>
+<td><p>Retrieve the given entry.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.insert" title="mobase.IFileTree.insert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert</span></code></a>(entry[, policy])</p></td>
+<td><p>Insert the given entry in this tree, removing it from its previouis parent.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.merge" title="mobase.IFileTree.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>(other[, overwrites])</p></td>
+<td><p>Merge the given tree with this tree, i.e., insert all entries of the given tree into this tree.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.move" title="mobase.IFileTree.move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move</span></code></a>(entry, path[, policy])</p></td>
+<td><p>Move the given entry to the given path under this tree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.pathTo" title="mobase.IFileTree.pathTo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pathTo</span></code></a>(entry[, sep])</p></td>
+<td><p>Retrieve the path from this tree to the given entry.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.remove" title="mobase.IFileTree.remove"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove</span></code></a>(**kwds)</p></td>
+<td><p>Helper for &#64;overload to raise when called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.removeAll" title="mobase.IFileTree.removeAll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeAll</span></code></a>(names)</p></td>
+<td><p>Delete the entries with the given names from the tree.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IFileTree.removeIf" title="mobase.IFileTree.removeIf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeIf</span></code></a>(filter)</p></td>
+<td><p>Delete entries matching the given predicate from the tree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IFileTree.walk" title="mobase.IFileTree.walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walk</span></code></a>(callback[, sep])</p></td>
+<td><p>Walk this tree, calling the given function for each entry in it.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="mobase.IFileTree.CONTINUE">
+<code class="sig-name descname">CONTINUE</code><em class="property">: IFileTree.WalkReturn</em><em class="property"> = Ellipsis</em><a class="headerlink" href="#mobase.IFileTree.CONTINUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mobase.IFileTree.FAIL_IF_EXISTS">
+<code class="sig-name descname">FAIL_IF_EXISTS</code><em class="property">: IFileTree.InsertPolicy</em><em class="property"> = Ellipsis</em><a class="headerlink" href="#mobase.IFileTree.FAIL_IF_EXISTS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mobase.IFileTree.MERGE">
+<code class="sig-name descname">MERGE</code><em class="property">: IFileTree.InsertPolicy</em><em class="property"> = Ellipsis</em><a class="headerlink" href="#mobase.IFileTree.MERGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mobase.IFileTree.REPLACE">
+<code class="sig-name descname">REPLACE</code><em class="property">: IFileTree.InsertPolicy</em><em class="property"> = Ellipsis</em><a class="headerlink" href="#mobase.IFileTree.REPLACE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mobase.IFileTree.SKIP">
+<code class="sig-name descname">SKIP</code><em class="property">: IFileTree.WalkReturn</em><em class="property"> = Ellipsis</em><a class="headerlink" href="#mobase.IFileTree.SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mobase.IFileTree.STOP">
+<code class="sig-name descname">STOP</code><em class="property">: IFileTree.WalkReturn</em><em class="property"> = Ellipsis</em><a class="headerlink" href="#mobase.IFileTree.STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="mobase.IFileTree.addDirectory">
+<code class="sig-name descname">addDirectory</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.addDirectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new directory tree under this tree.</p>
+<p>This method will create missing folders in the given path and will
+not fail if the directory already exists but will fail if the given
+path contains “.” or “..”.
+This method invalidates iterators to this tree and all the subtrees
+present in the given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – Path to the directory to create.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An IFileTree corresponding to the created directory.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the directory could not be created.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#mobase.IFileTree" title="mobase.IFileTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">IFileTree</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.addFile">
+<code class="sig-name descname">addFile</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">replace_if_exists=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.addFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new file directly under this tree.</p>
+<p>This method will fail if the file already exists and <cite>replace_if_exists</cite> is <cite>False</cite>.
+This method invalidates iterators to this tree and all the subtrees present in the
+given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to the file to create.</p></li>
+<li><p><strong>replace_if_exists</strong> – If True and an entry already exists at the given location, it will be replaced by        a new entry. This will replace both files and directories.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A FileTreeEntry corresponding to the created file.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the file could not be created.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.FileTreeEntry.html#mobase.FileTreeEntry" title="mobase.FileTreeEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileTreeEntry</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete (detach) all the entries from this tree.</p>
+<p>This method will go through the entries in this tree and stop at the first
+entry that cannot be deleted, this means that the tree can be partially cleared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if all entries have been detached, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param">entry</em>, <em class="sig-param">path=''</em>, <em class="sig-param">policy=&lt;InsertPolicy.FAIL_IF_EXISTS: Ellipsis&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move the given entry to the given path under this tree.</p>
+<p>The entry must not be a parent tree of this tree. This method can also be used
+to rename entries.</p>
+<p>If the insert policy if FAIL_IF_EXISTS, the call will fail if an entry
+at the same location already exists. If the policy is REPLACE, an existing
+entry will be replaced. If MERGE, the entry will be merged with the existing
+one (if the entry is a file, and a file exists, the file will be replaced).</p>
+<p>This method invalidates iterator to this tree, to the parent tree of the given
+entry, and to subtrees of this tree if the insert policy is MERGE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entry</strong> – Entry to copy.</p></li>
+<li><p><strong>path</strong> – The path to copy the entry to. If the path ends with / or , the entry will        be copied in the corresponding directory instead of replacing it. If the
+given path is empty (<cite>“”</cite>), the entry is copied directly under this tree.</p></li>
+<li><p><strong>policy</strong> – Policy to use to resolve conflicts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new entry (copy of the specified entry).</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the entry could not be copied.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="mobase.FileTreeEntry.html#mobase.FileTreeEntry" title="mobase.FileTreeEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileTreeEntry</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.createOrphanTree">
+<code class="sig-name descname">createOrphanTree</code><span class="sig-paren">(</span><em class="sig-param">name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.createOrphanTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new orphan empty tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the tree.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new tree without any parent.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mobase.IFileTree" title="mobase.IFileTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">IFileTree</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.exists">
+<code class="sig-name descname">exists</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">type=&lt;FileTypes.DIRECTORY: Ellipsis&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given entry exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to the entry, separated by / or .</p></li>
+<li><p><strong>type</strong> – The type of the entry to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the entry was found, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">type=&lt;FileTypes.DIRECTORY: Ellipsis&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the given entry.</p>
+<p>If no entry exists at the given path, or if the entry is not of the right
+type, <cite>None</cite> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to the entry, separated by / or .</p></li>
+<li><p><strong>type</strong> – The type of the entry to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The entry at the given location, or <cite>None</cite> if the entry was not found or</p>
+</dd>
+</dl>
+<p>was not of the correct type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="#mobase.IFileTree" title="mobase.IFileTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">IFileTree</span></code></a>, <a class="reference internal" href="mobase.FileTreeEntry.html#mobase.FileTreeEntry" title="mobase.FileTreeEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileTreeEntry</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.insert">
+<code class="sig-name descname">insert</code><span class="sig-paren">(</span><em class="sig-param">entry</em>, <em class="sig-param">policy=&lt;InsertPolicy.FAIL_IF_EXISTS: Ellipsis&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the given entry in this tree, removing it from its
+previouis parent.</p>
+<p>The entry must not be this tree or a parent entry of this tree.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If the insert policy if <cite>FAIL_IF_EXISTS</cite>, the call will fail if an entry
+with the same name already exists.</p></li>
+<li><p>If the policy is <cite>REPLACE</cite>, an existing entry will be replaced by the given entry.</p></li>
+<li><p>If the policy is <cite>MERGE</cite>:</p>
+<ul>
+<li><p>If there is no entry with the same name, the new entry is inserted.</p></li>
+<li><p>If there is an entry with the same name:</p>
+<ul>
+<li><p>If both entries are files, the old file is replaced by the given entry.</p></li>
+<li><p>If both entries are directories, a merge is performed as if using merge().</p></li>
+<li><p>Otherwize the insertion fails (two entries with different types).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>This method invalidates iterator to this tree, to the parent tree of the given
+entry, and to subtrees of this tree if the insert policy is MERGE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entry</strong> – Entry to insert.</p></li>
+<li><p><strong>policy</strong> – Policy to use to resolve conflicts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the entry was insert, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.merge">
+<code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">overwrites=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge the given tree with this tree, i.e., insert all entries
+of the given tree into this tree.</p>
+<p>The tree must not be this tree or a parent entry of this tree. Files present in both tree
+will be replaced by files in the given tree. After a merge, the source tree will be
+empty but still attached to its parent.</p>
+<p>If <cite>overwrites</cite> is <cite>True</cite>, a map from overriden files to new files will be returned.</p>
+<p>Note that the merge process makes no distinction between files and directories
+when merging: if a directory is present in this tree and a file from source
+is in conflict with it, the tree will be removed and the file inserted; if a file
+is in this tree and a directory from source is in conflict with it, the file will
+be replaced with the directory.</p>
+<p>This method invalidates iterators to this tree, all the subtrees under this tree
+present in the given path, and all the subtrees of the given source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> – Tree to merge.</p></li>
+<li><p><strong>overwrites</strong> – If True, a mapping from overriden files to new files will be returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If <cite>overwrites</cite> is True, a mapping from overriden files to new files, otherwise</p>
+</dd>
+</dl>
+<p>the number of overwritten entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the merge failed.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<a class="reference internal" href="mobase.FileTreeEntry.html#mobase.FileTreeEntry" title="mobase.FileTreeEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileTreeEntry</span></code></a>, <a class="reference internal" href="mobase.FileTreeEntry.html#mobase.FileTreeEntry" title="mobase.FileTreeEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileTreeEntry</span></code></a>], <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">entry</em>, <em class="sig-param">path</em>, <em class="sig-param">policy=&lt;InsertPolicy.FAIL_IF_EXISTS: Ellipsis&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move the given entry to the given path under this tree.</p>
+<p>The entry must not be a parent tree of this tree. This method can also be used
+to rename entries.</p>
+<p>If the insert policy if FAIL_IF_EXISTS, the call will fail if an entry
+at the same location already exists. If the policy is REPLACE, an existing
+entry will be replaced. If MERGE, the entry will be merged with the existing
+one (if the entry is a file, and a file exists, the file will be replaced).</p>
+<p>This method invalidates iterator to this tree, to the parent tree of the given
+entry, and to subtrees of this tree if the insert policy is MERGE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entry</strong> – Entry to move.</p></li>
+<li><p><strong>path</strong> – The path to move the entry to. If the path ends with / or , the entry will        be inserted in the corresponding directory instead of replacing it. If the
+given path is empty (<cite>“”</cite>), this is equivalent to <cite>insert()</cite>.</p></li>
+<li><p><strong>policy</strong> – Policy to use to resolve conflicts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the entry was moved correctly, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.pathTo">
+<code class="sig-name descname">pathTo</code><span class="sig-paren">(</span><em class="sig-param">entry</em>, <em class="sig-param">sep='\\'</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.pathTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the path from this tree to the given entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entry</strong> – The entry to reach, must be in this tree.</p></li>
+<li><p><strong>sep</strong> – The type of separator to use to create the path.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The path from this tree to the given entry, including the name of the entry, or</p>
+</dd>
+</dl>
+<p>an empty string if the given entry was not found under this tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for &#64;overload to raise when called.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.removeAll">
+<code class="sig-name descname">removeAll</code><span class="sig-paren">(</span><em class="sig-param">names</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.removeAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the entries with the given names from the tree.</p>
+<p>This method does not recurse into subtrees, so only entries accessible
+directly from this tree will be removed. This method invalidates iterators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> – Names of the entries to delete.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The number of deleted entry.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.removeIf">
+<code class="sig-name descname">removeIf</code><span class="sig-paren">(</span><em class="sig-param">filter</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.removeIf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete entries matching the given predicate from the tree.</p>
+<p>This method does not recurse into subtrees, so only entries accessible
+directly from this tree will be removed. This method invalidates iterators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filter</strong> – Predicate that should return true for entries to delete.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The number of deleted entry.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IFileTree.walk">
+<code class="sig-name descname">walk</code><span class="sig-paren">(</span><em class="sig-param">callback</em>, <em class="sig-param">sep='\\'</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IFileTree.walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk this tree, calling the given function for each entry in it.</p>
+<p>The given callback will be called with two parameters: the path from this tree to the given entry
+(with a trailing separator, not including the entry name), and the actual entry. The method returns
+a <cite>WalkReturn</cite> object to indicates what to do.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback</strong> – Method to call for each entry in the tree.</p></li>
+<li><p><strong>sep</strong> – Type of separator to use to construct the path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mobase.IInstallationManager.html" class="btn btn-neutral float-right" title="IInstallationManager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mobase.IDownloadManager.html" class="btn btn-neutral float-left" title="IDownloadManager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Holt59
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

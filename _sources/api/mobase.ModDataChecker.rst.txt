@@ -1,0 +1,33 @@
+ModDataChecker
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: ModDataChecker
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ModDataChecker.FIXABLE
+      ~ModDataChecker.INVALID
+      ~ModDataChecker.VALID
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ModDataChecker.dataLooksValid
+      ~ModDataChecker.fix
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: FIXABLE
+   .. autoattribute:: INVALID
+   .. autoattribute:: VALID
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: dataLooksValid
+   .. automethod:: fix

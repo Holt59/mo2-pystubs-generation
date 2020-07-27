@@ -1,0 +1,41 @@
+IModInterface
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: IModInterface
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IModInterface.absolutePath
+      ~IModInterface.addCategory
+      ~IModInterface.addNexusCategory
+      ~IModInterface.categories
+      ~IModInterface.name
+      ~IModInterface.remove
+      ~IModInterface.removeCategory
+      ~IModInterface.setGameName
+      ~IModInterface.setIsEndorsed
+      ~IModInterface.setName
+      ~IModInterface.setNewestVersion
+      ~IModInterface.setNexusID
+      ~IModInterface.setVersion
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: absolutePath
+   .. automethod:: addCategory
+   .. automethod:: addNexusCategory
+   .. automethod:: categories
+   .. automethod:: name
+   .. automethod:: remove
+   .. automethod:: removeCategory
+   .. automethod:: setGameName
+   .. automethod:: setIsEndorsed
+   .. automethod:: setName
+   .. automethod:: setNewestVersion
+   .. automethod:: setNexusID
+   .. automethod:: setVersion

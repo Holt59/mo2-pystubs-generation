@@ -1,0 +1,27 @@
+ExecutableForcedLoadSetting
+===========================
+
+.. currentmodule:: mobase
+
+.. autoclass:: ExecutableForcedLoadSetting
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ExecutableForcedLoadSetting.enabled
+      ~ExecutableForcedLoadSetting.forced
+      ~ExecutableForcedLoadSetting.library
+      ~ExecutableForcedLoadSetting.process
+      ~ExecutableForcedLoadSetting.withEnabled
+      ~ExecutableForcedLoadSetting.withForced
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: enabled
+   .. automethod:: forced
+   .. automethod:: library
+   .. automethod:: process
+   .. automethod:: withEnabled
+   .. automethod:: withForced

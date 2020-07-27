@@ -1,0 +1,19 @@
+ModDataContent
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: ModDataContent
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ModDataContent.getAllContents
+      ~ModDataContent.getContentsFor
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: getAllContents
+   .. automethod:: getContentsFor

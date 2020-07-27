@@ -1,0 +1,21 @@
+PluginState
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: PluginState
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~PluginState.ACTIVE
+      ~PluginState.INACTIVE
+      ~PluginState.MISSING
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: ACTIVE
+   .. autoattribute:: INACTIVE
+   .. autoattribute:: MISSING

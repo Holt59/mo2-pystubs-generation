@@ -1,0 +1,25 @@
+IPluginDiagnose
+===============
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginDiagnose
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginDiagnose.activeProblems
+      ~IPluginDiagnose.fullDescription
+      ~IPluginDiagnose.hasGuidedFix
+      ~IPluginDiagnose.shortDescription
+      ~IPluginDiagnose.startGuidedFix
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: activeProblems
+   .. automethod:: fullDescription
+   .. automethod:: hasGuidedFix
+   .. automethod:: shortDescription
+   .. automethod:: startGuidedFix

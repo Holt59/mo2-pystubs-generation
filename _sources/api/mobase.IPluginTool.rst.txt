@@ -1,0 +1,25 @@
+IPluginTool
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginTool
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginTool.display
+      ~IPluginTool.displayName
+      ~IPluginTool.icon
+      ~IPluginTool.setParentWidget
+      ~IPluginTool.tooltip
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: display
+   .. automethod:: displayName
+   .. automethod:: icon
+   .. automethod:: setParentWidget
+   .. automethod:: tooltip

@@ -1,0 +1,37 @@
+ExecutableInfo
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: ExecutableInfo
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ExecutableInfo.arguments
+      ~ExecutableInfo.asCustom
+      ~ExecutableInfo.binary
+      ~ExecutableInfo.isCustom
+      ~ExecutableInfo.isValid
+      ~ExecutableInfo.steamAppID
+      ~ExecutableInfo.title
+      ~ExecutableInfo.withArgument
+      ~ExecutableInfo.withSteamAppId
+      ~ExecutableInfo.withWorkingDirectory
+      ~ExecutableInfo.workingDirectory
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: arguments
+   .. automethod:: asCustom
+   .. automethod:: binary
+   .. automethod:: isCustom
+   .. automethod:: isValid
+   .. automethod:: steamAppID
+   .. automethod:: title
+   .. automethod:: withArgument
+   .. automethod:: withSteamAppId
+   .. automethod:: withWorkingDirectory
+   .. automethod:: workingDirectory

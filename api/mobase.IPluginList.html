@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IPluginList &mdash; MO2 Python Plugin API 2.3rc1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IPluginModPage" href="mobase.IPluginModPage.html" />
+    <link rel="prev" title="IPluginInstallerSimple" href="mobase.IPluginInstallerSimple.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MO2 Python Plugin API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup-tools.html">Setting up the environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#required-tools">Required tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#preparation">Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#get-the-mobase-stubs">1. Get the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#configure-visual-studio-code-for-mobase">2. Configure Visual Studio Code for <code class="docutils literal notranslate"><span class="pre">mobase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-tools.html#configure-mypy-to-find-the-mobase-stubs">3. Configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to find the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../setup-tools.html#testing-the-setup">Testing the setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugin-types.html">Type of Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#installers">Installers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#previewers">Previewers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#mod-page">Mod Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#game">Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#tool">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#proxies">Proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#free-plugins"><em>Free Plugins</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugin-types.html#extension-interfaces">Extension Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugin-types.html#diagnose">Diagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugin-types.html#file-mappings">File Mappings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#why-is-mo2-throwing-an-exception-when-i-try-to-create-a-type-inheriting-one-of-mo2-class">1. Why is MO2 throwing an exception when I try to create a type inheriting one of MO2 class?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#how-can-i-be-sure-to-implement-all-the-required-methods-when-creating-a-plugin">2. How can I be sure to implement all the required methods when creating a plugin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#why-are-my-isinstance-x-qobject-and-isinstance-y-qwidget-not-working">3. Why are my <code class="docutils literal notranslate"><span class="pre">isinstance(x,</span> <span class="pre">QObject)</span></code> and <code class="docutils literal notranslate"><span class="pre">isinstance(y,</span> <span class="pre">QWidget)</span></code> not working?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mobase.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getFileVersion.html">getFileVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getIconForExecutable.html">getIconForExecutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.getProductVersion.html">getProductVersion</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../mobase.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mobase.BSAInvalidation.html">BSAInvalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.DataArchives.html">DataArchives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ExecutableForcedLoadSetting.html">ExecutableForcedLoadSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ExecutableInfo.html">ExecutableInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.FileInfo.html">FileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.FileTreeEntry.html">FileTreeEntry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GamePlugins.html">GamePlugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GuessQuality.html">GuessQuality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.GuessedString.html">GuessedString</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IDownloadManager.html">IDownloadManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IFileTree.html">IFileTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IInstallationManager.html">IInstallationManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModInterface.html">IModInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModList.html">IModList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IModRepositoryBridge.html">IModRepositoryBridge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IOrganizer.html">IOrganizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPlugin.html">IPlugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginDiagnose.html">IPluginDiagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginFileMapper.html">IPluginFileMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginGame.html">IPluginGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstaller.html">IPluginInstaller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstallerCustom.html">IPluginInstallerCustom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginInstallerSimple.html">IPluginInstallerSimple</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IPluginList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginModPage.html">IPluginModPage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginPreview.html">IPluginPreview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IPluginTool.html">IPluginTool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.IProfile.html">IProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ISaveGame.html">ISaveGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ISaveGameInfoWidget.html">ISaveGameInfoWidget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.InstallResult.html">InstallResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.InterfaceNotImplemented.html">InterfaceNotImplemented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.LoadOrderMechanism.html">LoadOrderMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.LocalSavegames.html">LocalSavegames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.Mapping.html">Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModDataChecker.html">ModDataChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModDataContent.html">ModDataContent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModRepositoryFileInfo.html">ModRepositoryFileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ModState.html">ModState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.PluginSetting.html">PluginSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.PluginState.html">PluginState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ProfileSetting.html">ProfileSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ReleaseType.html">ReleaseType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.SaveGameInfo.html">SaveGameInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.ScriptExtender.html">ScriptExtender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.SortMechanism.html">SortMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.UnmanagedMods.html">UnmanagedMods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.VersionInfo.html">VersionInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobase.VersionScheme.html">VersionScheme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MO2 Python Plugin API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a> &raquo;</li>
+        
+      <li>IPluginList</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/mobase.IPluginList.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ipluginlist">
+<h1>IPluginList<a class="headerlink" href="#ipluginlist" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mobase.IPluginList">
+<em class="property">class </em><code class="sig-prename descclassname">mobase.</code><code class="sig-name descname">IPluginList</code><a class="headerlink" href="#mobase.IPluginList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Primary interface to the list of plugins.</p>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IPluginList.isMaster" title="mobase.IPluginList.isMaster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isMaster</span></code></a>(name)</p></td>
+<td><p>Check if a plugin is a master file (basically a library, referenced by other plugins).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IPluginList.loadOrder" title="mobase.IPluginList.loadOrder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadOrder</span></code></a>(name)</p></td>
+<td><p>Retrieve the load order of a plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IPluginList.masters" title="mobase.IPluginList.masters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">masters</span></code></a>(name)</p></td>
+<td><p>Retrieve the list of masters required for a plugin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IPluginList.onPluginMoved" title="mobase.IPluginList.onPluginMoved"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onPluginMoved</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when a plugin is moved.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IPluginList.onRefreshed" title="mobase.IPluginList.onRefreshed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onRefreshed</span></code></a>(callback)</p></td>
+<td><p>Install a new handler to be called when the list of plugins is refreshed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IPluginList.origin" title="mobase.IPluginList.origin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin</span></code></a>(name)</p></td>
+<td><p>Retrieve the origin of a plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IPluginList.pluginNames" title="mobase.IPluginList.pluginNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pluginNames</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>The list of all plugin names.</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IPluginList.priority" title="mobase.IPluginList.priority"><code class="xref py py-obj docutils literal notranslate"><span class="pre">priority</span></code></a>(name)</p></td>
+<td><p>Retrieve the priority of a plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IPluginList.setLoadOrder" title="mobase.IPluginList.setLoadOrder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLoadOrder</span></code></a>(loadorder)</p></td>
+<td><p>Set the load order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mobase.IPluginList.setState" title="mobase.IPluginList.setState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setState</span></code></a>(name, state)</p></td>
+<td><p>Set the state of a plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mobase.IPluginList.state" title="mobase.IPluginList.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a>(name)</p></td>
+<td><p>Retrieve the state of a plugin.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="mobase.IPluginList.isMaster">
+<code class="sig-name descname">isMaster</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.isMaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a plugin is a master file (basically a library, referenced by other plugins).</p>
+<p>In gamebryo games, a master file will usually have a .esm file extension but technically
+an esp can be flagged as master and an esm might not be.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the given plugin is a master plugin, False otherwise or if the file does not exist.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.loadOrder">
+<code class="sig-name descname">loadOrder</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.loadOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the load order of a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The load order of the plugin (the order in which the game loads it). If all plugins are enabled this</p>
+</dd>
+</dl>
+<p>is the same as the priority but disabled plugins will have a load order of -1. This also returns -1
+if the plugin does not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.masters">
+<code class="sig-name descname">masters</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.masters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the list of masters required for a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of masters for the plugin (filenames with extension, no path).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.onPluginMoved">
+<code class="sig-name descname">onPluginMoved</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.onPluginMoved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when a plugin is moved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when a plugin is moved. The first parameter is the plugin name, the        second the old priority of the plugin and the third one the new priority.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.onRefreshed">
+<code class="sig-name descname">onRefreshed</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.onRefreshed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install a new handler to be called when the list of plugins is refreshed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function to call when the list of plugins is refreshed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the handler was installed properly (there are currently no reasons for this to fail).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.origin">
+<code class="sig-name descname">origin</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the origin of a plugin. This is either the (internal) name of a mod, <cite>“overwrite”</cite> or <cite>“data”</cite>.</p>
+<p>The internal name of a mod can differ from the display name for disambiguation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The name of the origin of the plugin, or an empty string if the plugin does not exist.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.pluginNames">
+<code class="sig-name descname">pluginNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.pluginNames" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of all plugin names.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.priority">
+<code class="sig-name descname">priority</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the priority of a plugin.</p>
+<p>The higher the priority, the more important.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The priority of the given plugin, or -1 if the plugin does not exist.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.setLoadOrder">
+<code class="sig-name descname">setLoadOrder</code><span class="sig-paren">(</span><em class="sig-param">loadorder</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.setLoadOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the load order.</p>
+<p>Plugins not included in the list will be placed at highest priority in the order they
+were before.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>loadorder</strong> – The new load order, specified by the list of plugin names, sorted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.setState">
+<code class="sig-name descname">setState</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">state</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.setState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the state of a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p></li>
+<li><p><strong>state</strong> – New state of the plugin (<cite>INACTIVE</cite> or <cite>ACTIVE</cite>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mobase.IPluginList.state">
+<code class="sig-name descname">state</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mobase.IPluginList.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the state of a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename of the plugin (without path but with file extension).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The state of the plugin.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mobase.IPluginModPage.html" class="btn btn-neutral float-right" title="IPluginModPage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mobase.IPluginInstallerSimple.html" class="btn btn-neutral float-left" title="IPluginInstallerSimple" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Holt59
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+GuessQuality
+============
+
+.. currentmodule:: mobase
+
+.. autoclass:: GuessQuality
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~GuessQuality.FALLBACK
+      ~GuessQuality.GOOD
+      ~GuessQuality.INVALID
+      ~GuessQuality.META
+      ~GuessQuality.PRESET
+      ~GuessQuality.USER
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: FALLBACK
+   .. autoattribute:: GOOD
+   .. autoattribute:: INVALID
+   .. autoattribute:: META
+   .. autoattribute:: PRESET
+   .. autoattribute:: USER

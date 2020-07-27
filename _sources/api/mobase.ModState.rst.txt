@@ -1,0 +1,29 @@
+ModState
+========
+
+.. currentmodule:: mobase
+
+.. autoclass:: ModState
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ModState.ACTIVE
+      ~ModState.ALTERNATE
+      ~ModState.EMPTY
+      ~ModState.ENDORSED
+      ~ModState.ESSENTIAL
+      ~ModState.EXISTS
+      ~ModState.VALID
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: ACTIVE
+   .. autoattribute:: ALTERNATE
+   .. autoattribute:: EMPTY
+   .. autoattribute:: ENDORSED
+   .. autoattribute:: ESSENTIAL
+   .. autoattribute:: EXISTS
+   .. autoattribute:: VALID

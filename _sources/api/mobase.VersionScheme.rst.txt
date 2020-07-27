@@ -1,0 +1,27 @@
+VersionScheme
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: VersionScheme
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~VersionScheme.DATE
+      ~VersionScheme.DECIMAL_MARK
+      ~VersionScheme.DISCOVER
+      ~VersionScheme.LITERAL
+      ~VersionScheme.NUMBERS_AND_LETTERS
+      ~VersionScheme.REGULAR
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: DATE
+   .. autoattribute:: DECIMAL_MARK
+   .. autoattribute:: DISCOVER
+   .. autoattribute:: LITERAL
+   .. autoattribute:: NUMBERS_AND_LETTERS
+   .. autoattribute:: REGULAR

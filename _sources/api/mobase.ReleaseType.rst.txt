@@ -1,0 +1,25 @@
+ReleaseType
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: ReleaseType
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ReleaseType.ALPHA
+      ~ReleaseType.BETA
+      ~ReleaseType.CANDIDATE
+      ~ReleaseType.FINAL
+      ~ReleaseType.PRE_ALPHA
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: ALPHA
+   .. autoattribute:: BETA
+   .. autoattribute:: CANDIDATE
+   .. autoattribute:: FINAL
+   .. autoattribute:: PRE_ALPHA

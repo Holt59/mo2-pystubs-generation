@@ -1,0 +1,19 @@
+LoadOrderMechanism
+==================
+
+.. currentmodule:: mobase
+
+.. autoclass:: LoadOrderMechanism
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~LoadOrderMechanism.FILE_TIME
+      ~LoadOrderMechanism.PLUGINS_TXT
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: FILE_TIME
+   .. autoattribute:: PLUGINS_TXT

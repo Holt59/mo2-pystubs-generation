@@ -1,0 +1,65 @@
+IFileTree
+=========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IFileTree
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~IFileTree.CONTINUE
+      ~IFileTree.FAIL_IF_EXISTS
+      ~IFileTree.MERGE
+      ~IFileTree.REPLACE
+      ~IFileTree.SKIP
+      ~IFileTree.STOP
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IFileTree.addDirectory
+      ~IFileTree.addFile
+      ~IFileTree.clear
+      ~IFileTree.copy
+      ~IFileTree.createOrphanTree
+      ~IFileTree.exists
+      ~IFileTree.find
+      ~IFileTree.insert
+      ~IFileTree.merge
+      ~IFileTree.move
+      ~IFileTree.pathTo
+      ~IFileTree.remove
+      ~IFileTree.removeAll
+      ~IFileTree.removeIf
+      ~IFileTree.walk
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: CONTINUE
+   .. autoattribute:: FAIL_IF_EXISTS
+   .. autoattribute:: MERGE
+   .. autoattribute:: REPLACE
+   .. autoattribute:: SKIP
+   .. autoattribute:: STOP
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: addDirectory
+   .. automethod:: addFile
+   .. automethod:: clear
+   .. automethod:: copy
+   .. automethod:: createOrphanTree
+   .. automethod:: exists
+   .. automethod:: find
+   .. automethod:: insert
+   .. automethod:: merge
+   .. automethod:: move
+   .. automethod:: pathTo
+   .. automethod:: remove
+   .. automethod:: removeAll
+   .. automethod:: removeIf
+   .. automethod:: walk

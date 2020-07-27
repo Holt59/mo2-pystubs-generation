@@ -1,0 +1,23 @@
+ProfileSetting
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: ProfileSetting
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ProfileSetting.CONFIGURATION
+      ~ProfileSetting.MODS
+      ~ProfileSetting.PREFER_DEFAULTS
+      ~ProfileSetting.SAVEGAMES
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: CONFIGURATION
+   .. autoattribute:: MODS
+   .. autoattribute:: PREFER_DEFAULTS
+   .. autoattribute:: SAVEGAMES

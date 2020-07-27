@@ -1,0 +1,37 @@
+IDownloadManager
+================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IDownloadManager
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~IDownloadManager.downloadComplete
+      ~IDownloadManager.downloadFailed
+      ~IDownloadManager.downloadPaused
+      ~IDownloadManager.downloadRemoved
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IDownloadManager.downloadPath
+      ~IDownloadManager.startDownloadNexusFile
+      ~IDownloadManager.startDownloadURLs
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: downloadComplete
+   .. autoattribute:: downloadFailed
+   .. autoattribute:: downloadPaused
+   .. autoattribute:: downloadRemoved
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: downloadPath
+   .. automethod:: startDownloadNexusFile
+   .. automethod:: startDownloadURLs

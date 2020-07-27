@@ -1,0 +1,6 @@
+getIconForExecutable
+====================
+
+.. currentmodule:: mobase
+
+.. autofunction:: getIconForExecutable

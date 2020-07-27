@@ -1,0 +1,29 @@
+IPlugin
+=======
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPlugin
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPlugin.author
+      ~IPlugin.description
+      ~IPlugin.init
+      ~IPlugin.isActive
+      ~IPlugin.name
+      ~IPlugin.settings
+      ~IPlugin.version
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: author
+   .. automethod:: description
+   .. automethod:: init
+   .. automethod:: isActive
+   .. automethod:: name
+   .. automethod:: settings
+   .. automethod:: version

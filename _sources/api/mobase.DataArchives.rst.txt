@@ -1,0 +1,23 @@
+DataArchives
+============
+
+.. currentmodule:: mobase
+
+.. autoclass:: DataArchives
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~DataArchives.addArchive
+      ~DataArchives.archives
+      ~DataArchives.removeArchive
+      ~DataArchives.vanillaArchives
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: addArchive
+   .. automethod:: archives
+   .. automethod:: removeArchive
+   .. automethod:: vanillaArchives

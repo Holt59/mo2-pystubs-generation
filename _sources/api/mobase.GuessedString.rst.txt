@@ -1,0 +1,23 @@
+GuessedString
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: GuessedString
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~GuessedString.reset
+      ~GuessedString.setFilter
+      ~GuessedString.update
+      ~GuessedString.variants
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: reset
+   .. automethod:: setFilter
+   .. automethod:: update
+   .. automethod:: variants

@@ -1,0 +1,21 @@
+PluginSetting
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: PluginSetting
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~PluginSetting.default_value
+      ~PluginSetting.description
+      ~PluginSetting.key
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: default_value
+   .. autoattribute:: description
+   .. autoattribute:: key

@@ -1,0 +1,19 @@
+LocalSavegames
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: LocalSavegames
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~LocalSavegames.mappings
+      ~LocalSavegames.prepareProfile
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: mappings
+   .. automethod:: prepareProfile

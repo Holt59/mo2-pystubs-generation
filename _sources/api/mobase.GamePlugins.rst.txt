@@ -1,0 +1,23 @@
+GamePlugins
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: GamePlugins
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~GamePlugins.getLoadOrder
+      ~GamePlugins.lightPluginsAreSupported
+      ~GamePlugins.readPluginLists
+      ~GamePlugins.writePluginLists
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: getLoadOrder
+   .. automethod:: lightPluginsAreSupported
+   .. automethod:: readPluginLists
+   .. automethod:: writePluginLists

@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Type of Plugins &mdash; MO2 Python Plugin API 2.3rc1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Setting up the environment" href="setup-tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> MO2 Python Plugin API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup-tools.html">Setting up the environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup-tools.html#required-tools">Required tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup-tools.html#preparation">Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="setup-tools.html#get-the-mobase-stubs">1. Get the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup-tools.html#configure-visual-studio-code-for-mobase">2. Configure Visual Studio Code for <code class="docutils literal notranslate"><span class="pre">mobase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup-tools.html#configure-mypy-to-find-the-mobase-stubs">3. Configure <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to find the <code class="docutils literal notranslate"><span class="pre">mobase</span></code> stubs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="setup-tools.html#testing-the-setup">Testing the setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Type of Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installers">Installers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#previewers">Previewers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mod-page">Mod Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#game">Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tool">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proxies">Proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#free-plugins"><em>Free Plugins</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extension-interfaces">Extension Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#diagnose">Diagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-mappings">File Mappings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-is-mo2-throwing-an-exception-when-i-try-to-create-a-type-inheriting-one-of-mo2-class">1. Why is MO2 throwing an exception when I try to create a type inheriting one of MO2 class?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-can-i-be-sure-to-implement-all-the-required-methods-when-creating-a-plugin">2. How can I be sure to implement all the required methods when creating a plugin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-are-my-isinstance-x-qobject-and-isinstance-y-qwidget-not-working">3. Why are my <code class="docutils literal notranslate"><span class="pre">isinstance(x,</span> <span class="pre">QObject)</span></code> and <code class="docutils literal notranslate"><span class="pre">isinstance(y,</span> <span class="pre">QWidget)</span></code> not working?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mobase.html"><code class="docutils literal notranslate"><span class="pre">mobase</span></code> API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mobase.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.getFileVersion.html">getFileVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.getIconForExecutable.html">getIconForExecutable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.getProductVersion.html">getProductVersion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mobase.html#classes">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.BSAInvalidation.html">BSAInvalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.DataArchives.html">DataArchives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ExecutableForcedLoadSetting.html">ExecutableForcedLoadSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ExecutableInfo.html">ExecutableInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.FileInfo.html">FileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.FileTreeEntry.html">FileTreeEntry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.GamePlugins.html">GamePlugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.GuessQuality.html">GuessQuality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.GuessedString.html">GuessedString</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IDownloadManager.html">IDownloadManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IFileTree.html">IFileTree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IInstallationManager.html">IInstallationManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IModInterface.html">IModInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IModList.html">IModList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IModRepositoryBridge.html">IModRepositoryBridge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IOrganizer.html">IOrganizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPlugin.html">IPlugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginDiagnose.html">IPluginDiagnose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginFileMapper.html">IPluginFileMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginGame.html">IPluginGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginInstaller.html">IPluginInstaller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginInstallerCustom.html">IPluginInstallerCustom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginInstallerSimple.html">IPluginInstallerSimple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginList.html">IPluginList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginModPage.html">IPluginModPage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginPreview.html">IPluginPreview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IPluginTool.html">IPluginTool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.IProfile.html">IProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ISaveGame.html">ISaveGame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ISaveGameInfoWidget.html">ISaveGameInfoWidget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.InstallResult.html">InstallResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.InterfaceNotImplemented.html">InterfaceNotImplemented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.LoadOrderMechanism.html">LoadOrderMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.LocalSavegames.html">LocalSavegames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.Mapping.html">Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModDataChecker.html">ModDataChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModDataContent.html">ModDataContent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModRepositoryFileInfo.html">ModRepositoryFileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ModState.html">ModState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.PluginSetting.html">PluginSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.PluginState.html">PluginState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ProfileSetting.html">ProfileSetting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ReleaseType.html">ReleaseType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.SaveGameInfo.html">SaveGameInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.ScriptExtender.html">ScriptExtender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.SortMechanism.html">SortMechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.UnmanagedMods.html">UnmanagedMods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.VersionInfo.html">VersionInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mobase.VersionScheme.html">VersionScheme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MO2 Python Plugin API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Type of Plugins</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/plugin-types.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="type-of-plugins">
+<h1>Type of Plugins<a class="headerlink" href="#type-of-plugins" title="Permalink to this headline">¶</a></h1>
+<p>Plugins are passive, that is: they react to events emitted by the core application or extend
+an existing functionality (like adding support for additional types of installers). Plugins
+should integrate with Mod Organizers concepts. While you could write an INI editor that works with
+the global INI files instead of the profile specific ones, what would be the point?</p>
+<p>Depending on where/how the plugin integrates with MO you need to write a different type of plugin,
+in practice this means you need to implement a different interface (inherit from a different base
+plugin class from <code class="docutils literal notranslate"><span class="pre">mobase</span></code>). As mentioned above, plugins are passive: the plugin type decides how/when
+MO makes requests to/invokes your plugin.
+All plugins however gain access to MOs own plugin interface so all plugins get to make the same requests
+to MO.</p>
+<div class="section" id="installers">
+<h2>Installers<a class="headerlink" href="#installers" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginInstaller</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginInstallerSimple</span></code>, <cite>IPluginInstallerCustom</cite>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">installer_bain</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_bundle</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_fomod</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_ncc</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_quick</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_manual</span></code>.</p>
+<p>An installer is invoked when the user tries to install a mod, either by double clicking in the download
+view or through the “Install Mod..” button or “Reinstall mod” item from the mod lists context menu.
+There are actually two ways to write an installer, <em>simple</em> or <em>complex</em>:</p>
+<ul class="simple">
+<li><p>With <em>simple</em> installers, MO does the unpacking of the file but this works only with standard archive formats.
+The plugin can then select the files and folders that requires extraction, and where to extract them.</p></li>
+<li><p><em>Complex</em> installers are more flexible but require a bit more work.</p></li>
+</ul>
+</div>
+<div class="section" id="previewers">
+<h2>Previewers<a class="headerlink" href="#previewers" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginPreview</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">preview_base</span></code></p>
+<p>These plugins add support for previewing files in the data pane.
+Right now all image formats supported by Qt are implemented (including <cite>.dds</cite>) but no audio files and
+no 3d mesh formats.</p>
+</div>
+<div class="section" id="mod-page">
+<h2>Mod Page<a class="headerlink" href="#mod-page" title="Permalink to this headline">¶</a></h2>
+<p><em>WIP</em></p>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginModPage</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">page_tesalliance</span></code></p>
+<p>Mod Page plugins implement interfaces to modding communities where mods can be downloaded, checked
+for updates and so on.
+This interface is not finished and some of the bits that are do not actually get used. The goal is
+that the whole Nexus integration can be implemented through this interface and can then be removed
+from the core application. This is a task for the distant future, unless someone wants to volunteer.</p>
+</div>
+<div class="section" id="game">
+<h2>Game<a class="headerlink" href="#game" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginGame</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">game_oblivion</span></code>, <code class="docutils literal notranslate"><span class="pre">game_fallout3</span></code>, <code class="docutils literal notranslate"><span class="pre">game_falloutnv</span></code>, <code class="docutils literal notranslate"><span class="pre">game_skyrim</span></code>, …</p>
+<p>These plugins (shall eventually) implement all the game specific features and further game plugins are
+able to add support for further games.
+The plugin is also responsible to help MO determine if (and where) the game is installed in the first place.
+Since supporting a game properly requires extensions in many places of the UI.
+To allow this without creating one huge plugin interface that involves every aspect of MO, game plugins
+expose a <em>feature list</em>.
+The list of possible features can be found in the “game_features” project and each feature can itself be
+considered a plugin interface.</p>
+<p>As an example for a game feature take BSA invalidation: If the game requires BSA invalidation it will implement
+this feature.
+Wherever the core can support BSA invalidation it will query whether the current game has this feature and if so
+query the implementation on specifics (like “How should the invalidation BSA be called” and “what’s the right bsa version”).
+Of course, the goal is for feature interfaces to be as generic as possible without limiting usefulness.</p>
+<p><strong>Note:</strong> The <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginGame</span></code> interface is complex, and mostly designed for Gamebryo games. If you plan
+on writting a game plugin for another type of games, you might be interested by a simpler interface and might
+want to check out the <a class="reference external" href="https://github.com/Holt59/modorganizer-basic_games">Basic Games</a> meta-plugin.</p>
+</div>
+<div class="section" id="tool">
+<h2>Tool<a class="headerlink" href="#tool" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginTool</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">tool_configurator</span></code>, <code class="docutils literal notranslate"><span class="pre">tool_inieditor</span></code>, <code class="docutils literal notranslate"><span class="pre">fnistool</span></code></p>
+<p>This is the simplest of plugin interfaces. Such plugins simply place an icon inside the tools submenu and get
+invoked when the user clicks it. They are expected to have a user interface of some sort.
+These are almost like independent applications except they can access all Mod Organizer interfaces like querying
+and modifying the current profile, mod list, load order, use MO to install mods and so on.
+A tool plugin can (and should!) integrate its UI as a window inside MO and thus doesn’t have to initialize a
+windows application itself.</p>
+</div>
+<div class="section" id="proxies">
+<h2>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginProxy</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">plugin_python</span></code></p>
+<p>Proxy Plugins expose the plugin api to foreign languages. This is what allows you to write plugins using python
+in the first place.
+The python proxy is easily the most complicated plugin and requires constant updating so if you’re considering
+writing a Haskell plugin because that is your programming language of choice, I am fairly certain learning python
+is easier than writing the haskell proxy. Just saying.
+And no, you can not write a proxy for a third language in Python, do not be silly.</p>
+</div>
+<div class="section" id="free-plugins">
+<h2><em>Free Plugins</em><a class="headerlink" href="#free-plugins" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPlugin</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">check_fnis</span></code>, <code class="docutils literal notranslate"><span class="pre">bsa_extractor</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnose_basic</span></code>, <code class="docutils literal notranslate"><span class="pre">tool_inibakery</span></code></p>
+<p>“Free” plugins implement none of the interfaces and thus initially do not integrate with MO at all.
+They are initialized by MO and get access to the MO interface.
+This makes sense if you only want to implement one of the extension interfaces (see below) or register handlers
+for events.</p>
+</div>
+<div class="section" id="extension-interfaces">
+<h2>Extension Interfaces<a class="headerlink" href="#extension-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>In Python, these interfaces are similar to other plugin types, but in C++, those do not inherit <code class="docutils literal notranslate"><span class="pre">IPlugin</span></code> so
+that plugins can implement one or more of these interfaces, in addition to a normal plugin type.</p>
+<div class="section" id="diagnose">
+<h3>Diagnose<a class="headerlink" href="#diagnose" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginDiagnose</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">diagnose_basic</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_ncc</span></code>, <code class="docutils literal notranslate"><span class="pre">plugin_python</span></code>, <code class="docutils literal notranslate"><span class="pre">script_extender_plugin_checker</span></code></p>
+<p>This interface lets the plugin report issues that are then listed in the “Problems” icon in the main window.
+If possible the plugin can also provide an automatic or guided fix to the problem.
+The <code class="docutils literal notranslate"><span class="pre">diagnose_basic</span></code> plugin does nothing but analyze the MO installation and report problems it discovers (like
+<em>“There are files in your overwrite directory.”</em>) but usually a plugin will want to report issues relevant for its
+own operation.
+For instance, <code class="docutils literal notranslate"><span class="pre">installer_ncc</span></code> requires a specific version of .NET and will report a problem if it is not installed.
+This should always be the prefered way to communicate problems the user has to fix but should never be used for problems
+he cannot fix (i.e. <em>“This plugin does not work with this game.”</em>).
+An empty problem list should always be achievable.</p>
+</div>
+<div class="section" id="file-mappings">
+<h3>File Mappings<a class="headerlink" href="#file-mappings" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interface:</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">IPluginFileMapper</span></code>
+<strong>Examples:</strong> <code class="docutils literal notranslate"><span class="pre">tool_inibakery</span></code>, <code class="docutils literal notranslate"><span class="pre">game_gamebryo</span></code></p>
+<p>This interface allows plugins to add virtual file (or directory) links to the virtual file system in addition to the
+mod files.
+Profile-local save games, ini-files and load-orders are all implemented this way in MO2.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup-tools.html" class="btn btn-neutral float-left" title="Setting up the environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Holt59
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+ISaveGame
+=========
+
+.. currentmodule:: mobase
+
+.. autoclass:: ISaveGame
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ISaveGame.allFiles
+      ~ISaveGame.getCreationTime
+      ~ISaveGame.getFilename
+      ~ISaveGame.getSaveGroupIdentifier
+      ~ISaveGame.hasScriptExtenderFile
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: allFiles
+   .. automethod:: getCreationTime
+   .. automethod:: getFilename
+   .. automethod:: getSaveGroupIdentifier
+   .. automethod:: hasScriptExtenderFile

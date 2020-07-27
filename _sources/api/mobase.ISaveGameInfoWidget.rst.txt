@@ -1,0 +1,17 @@
+ISaveGameInfoWidget
+===================
+
+.. currentmodule:: mobase
+
+.. autoclass:: ISaveGameInfoWidget
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ISaveGameInfoWidget.setSave
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: setSave

@@ -1,0 +1,25 @@
+IProfile
+========
+
+.. currentmodule:: mobase
+
+.. autoclass:: IProfile
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IProfile.absolutePath
+      ~IProfile.invalidationActive
+      ~IProfile.localSavesEnabled
+      ~IProfile.localSettingsEnabled
+      ~IProfile.name
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: absolutePath
+   .. automethod:: invalidationActive
+   .. automethod:: localSavesEnabled
+   .. automethod:: localSettingsEnabled
+   .. automethod:: name

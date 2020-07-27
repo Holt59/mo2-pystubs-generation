@@ -1,0 +1,23 @@
+Mapping
+=======
+
+.. currentmodule:: mobase
+
+.. autoclass:: Mapping
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~Mapping.createTarget
+      ~Mapping.destination
+      ~Mapping.isDirectory
+      ~Mapping.source
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: createTarget
+   .. autoattribute:: destination
+   .. autoattribute:: isDirectory
+   .. autoattribute:: source

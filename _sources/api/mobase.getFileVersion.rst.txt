@@ -1,0 +1,6 @@
+getFileVersion
+==============
+
+.. currentmodule:: mobase
+
+.. autofunction:: getFileVersion

@@ -1,0 +1,23 @@
+SaveGameInfo
+============
+
+.. currentmodule:: mobase
+
+.. autoclass:: SaveGameInfo
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~SaveGameInfo.getMissingAssets
+      ~SaveGameInfo.getSaveGameInfo
+      ~SaveGameInfo.getSaveGameWidget
+      ~SaveGameInfo.hasScriptExtenderSave
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: getMissingAssets
+   .. automethod:: getSaveGameInfo
+   .. automethod:: getSaveGameWidget
+   .. automethod:: hasScriptExtenderSave

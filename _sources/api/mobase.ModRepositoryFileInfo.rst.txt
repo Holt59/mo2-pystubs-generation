@@ -1,0 +1,57 @@
+ModRepositoryFileInfo
+=====================
+
+.. currentmodule:: mobase
+
+.. autoclass:: ModRepositoryFileInfo
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ModRepositoryFileInfo.categoryID
+      ~ModRepositoryFileInfo.description
+      ~ModRepositoryFileInfo.fileCategory
+      ~ModRepositoryFileInfo.fileID
+      ~ModRepositoryFileInfo.fileName
+      ~ModRepositoryFileInfo.fileSize
+      ~ModRepositoryFileInfo.fileTime
+      ~ModRepositoryFileInfo.gameName
+      ~ModRepositoryFileInfo.modID
+      ~ModRepositoryFileInfo.modName
+      ~ModRepositoryFileInfo.name
+      ~ModRepositoryFileInfo.newestVersion
+      ~ModRepositoryFileInfo.repository
+      ~ModRepositoryFileInfo.uri
+      ~ModRepositoryFileInfo.userData
+      ~ModRepositoryFileInfo.version
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ModRepositoryFileInfo.createFromJson
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: categoryID
+   .. autoattribute:: description
+   .. autoattribute:: fileCategory
+   .. autoattribute:: fileID
+   .. autoattribute:: fileName
+   .. autoattribute:: fileSize
+   .. autoattribute:: fileTime
+   .. autoattribute:: gameName
+   .. autoattribute:: modID
+   .. autoattribute:: modName
+   .. autoattribute:: name
+   .. autoattribute:: newestVersion
+   .. autoattribute:: repository
+   .. autoattribute:: uri
+   .. autoattribute:: userData
+   .. autoattribute:: version
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: createFromJson

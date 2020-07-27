@@ -1,0 +1,21 @@
+FileInfo
+========
+
+.. currentmodule:: mobase
+
+.. autoclass:: FileInfo
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~FileInfo.archive
+      ~FileInfo.filePath
+      ~FileInfo.origins
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: archive
+   .. autoattribute:: filePath
+   .. autoattribute:: origins

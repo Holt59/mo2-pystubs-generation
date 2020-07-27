@@ -1,0 +1,27 @@
+VersionInfo
+===========
+
+.. currentmodule:: mobase
+
+.. autoclass:: VersionInfo
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~VersionInfo.canonicalString
+      ~VersionInfo.clear
+      ~VersionInfo.displayString
+      ~VersionInfo.isValid
+      ~VersionInfo.parse
+      ~VersionInfo.scheme
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: canonicalString
+   .. automethod:: clear
+   .. automethod:: displayString
+   .. automethod:: isValid
+   .. automethod:: parse
+   .. automethod:: scheme

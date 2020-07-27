@@ -1,0 +1,17 @@
+IPluginInstallerSimple
+======================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginInstallerSimple
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginInstallerSimple.install
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: install

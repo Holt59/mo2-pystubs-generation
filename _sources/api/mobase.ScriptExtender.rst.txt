@@ -1,0 +1,31 @@
+ScriptExtender
+==============
+
+.. currentmodule:: mobase
+
+.. autoclass:: ScriptExtender
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~ScriptExtender.BinaryName
+      ~ScriptExtender.PluginPath
+      ~ScriptExtender.getArch
+      ~ScriptExtender.getExtenderVersion
+      ~ScriptExtender.isInstalled
+      ~ScriptExtender.loaderName
+      ~ScriptExtender.loaderPath
+      ~ScriptExtender.saveGameAttachmentExtensions
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: BinaryName
+   .. automethod:: PluginPath
+   .. automethod:: getArch
+   .. automethod:: getExtenderVersion
+   .. automethod:: isInstalled
+   .. automethod:: loaderName
+   .. automethod:: loaderPath
+   .. automethod:: saveGameAttachmentExtensions

@@ -1,0 +1,6 @@
+getProductVersion
+=================
+
+.. currentmodule:: mobase
+
+.. autofunction:: getProductVersion

@@ -1,0 +1,25 @@
+InstallResult
+=============
+
+.. currentmodule:: mobase
+
+.. autoclass:: InstallResult
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~InstallResult.CANCELED
+      ~InstallResult.FAILED
+      ~InstallResult.MANUAL_REQUESTED
+      ~InstallResult.NOT_ATTEMPTED
+      ~InstallResult.SUCCESS
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: CANCELED
+   .. autoattribute:: FAILED
+   .. autoattribute:: MANUAL_REQUESTED
+   .. autoattribute:: NOT_ATTEMPTED
+   .. autoattribute:: SUCCESS

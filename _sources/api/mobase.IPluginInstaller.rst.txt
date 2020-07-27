@@ -1,0 +1,25 @@
+IPluginInstaller
+================
+
+.. currentmodule:: mobase
+
+.. autoclass:: IPluginInstaller
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~IPluginInstaller.isArchiveSupported
+      ~IPluginInstaller.isManualInstaller
+      ~IPluginInstaller.priority
+      ~IPluginInstaller.setInstallationManager
+      ~IPluginInstaller.setParentWidget
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: isArchiveSupported
+   .. automethod:: isManualInstaller
+   .. automethod:: priority
+   .. automethod:: setInstallationManager
+   .. automethod:: setParentWidget
